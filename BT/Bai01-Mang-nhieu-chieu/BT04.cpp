@@ -54,8 +54,12 @@ int main()
         for (int j = 0; j < col; j++)
         {
             if (value == arr[i][j])
+            {
+                cout << value << " xuat hien o vi tri cot thu " << i + 1 << " va hang thu " << j + 1 << endl;
                 ++count;
+            }
         }
     }
+    cout << value << " xuat hien trong mang " << count << " lan\n";
     return 0;
 }
