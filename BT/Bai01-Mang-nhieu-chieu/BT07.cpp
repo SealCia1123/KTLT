@@ -10,11 +10,11 @@ void output(const int arr[MAX_COL][MAX_ROW], int row, int col);
 
 double averangeValue(const int arr[MAX_COL][MAX_ROW], int row, int col);
 
-int findValue(const int arr[MAX_COL][MAX_ROW], int row, int col, int value);
+int findValue(const int arr[MAX_COL][MAX_ROW], int row, int col, const int value);
 
-void mySwap(int &a, int &b);
+void swapTwoElements(int arr[MAX_COL][MAX_ROW], int row, int col, int x, int y);
 
-void swapTwoElements(const int arr[MAX_COL][MAX_ROW], int row, int col, int x, int y);
+int multiply(const int arr[MAX_COL][MAX_ROW], int row, int col, int x);
 
 int main()
 {
@@ -33,6 +33,17 @@ int main()
         cout << "Khong tim thay " << value << endl;
     else
         cout << "Tim thay " << value << " trong mang\n";
+
+    int x, y;
+    cout << "Nhap vao hai gia tri muon hoan doi: ";
+    cin >> x >> y;
+    swapTwoElements(arr, row, col, x, y);
+    output(arr, row, col);
+
+    int mulCol;
+    cout << "Nhap vao cot can tinh tich: ";
+    cin >> mulCol;
+    cout << "Tich cot can tinh: " << multiply(arr, row, col, --mulCol) << endl;
     return 0;
 }
 
@@ -68,7 +79,7 @@ double averangeValue(const int arr[MAX_COL][MAX_ROW], int row, int col)
     return result;
 }
 
-int findValue(const int arr[MAX_COL][MAX_ROW], int row, int col, int value)
+int findValue(const int arr[MAX_COL][MAX_ROW], int row, int col, const int value)
 {
     for (int i = 0; i < row; i++)
     {
@@ -81,14 +92,35 @@ int findValue(const int arr[MAX_COL][MAX_ROW], int row, int col, int value)
     return INT_MIN;
 }
 
-void mySwap(int &a, int &b)
+void swapTwoElements(int arr[MAX_COL][MAX_ROW], int row, int col, int x, int y)
 {
-    int temp = a;
-    a = b;
-    b = temp;
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            if (arr[i][j] == x)
+            {
+                int temp = arr[i][j];
+                arr[i][j] = findValue(arr, row, col, y);
+
+                for (int k = row - 1; k >= i; --k)
+                {
+                    for (int l = col - 1; l >= 0; --l)
+                    {
+                        if (arr[k][l] == y)
+                            arr[k][l] = temp;
+                        return;
+                    }
+                }
+            }
+        }
+    }
 }
 
-void swapTwoElements(const int arr[MAX_COL][MAX_ROW], int row, int col, int x, int y)
+int multiply(const int arr[MAX_COL][MAX_ROW], int row, int col, int x)
 {
-    mySwap(findValue(arr, row, col, x), findValue(arr, row, col, y));
+    int result = 1;
+    for (int i = 0; i < row; i++)
+        result *= arr[i][x];
+    return result;
 }
