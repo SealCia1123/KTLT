@@ -1,40 +1,21 @@
-#include <cmath>
+// Viet ham tinh gia tri Fibonacci cua so nguyen khong am
 #include <iostream>
 using namespace std;
 
-double normalPow(int x, int y)
-{
-    double result = 1.0;
-    if (y >= 0)
-    {
-        for (int i = 1; i <= y; i++)
-            result *= x;
-    }
-    else
-    {
-        for (int i = 1; i <= abs(y); i++)
-            result /= x;
-    }
-    return result;
-}
-
-double myPow(int x, int y);
+int fib(int n);
 
 int main()
 {
-    int x, y;
-    cout << "Nhap vao x, y: ";
-    cin >> x >> y;
-    cout << "Ket qua cua " << x << " mu " << y << " la: " << myPow(x, y) << endl;
+    int n;
+    cout << "Nhap vao so can tinh: ";
+    cin >> n;
+    cout << "So Fibonacci cua " << n << " la: " << fib(n) << endl;
     return 0;
 }
 
-double myPow(int x, int y)
+int fib(int n)
 {
-    if (y == 0)
+    if (n == 0 || n == 1)
         return 1;
-    else if (y > 0)
-        return x * myPow(x, y - 1);
-    else
-        return 1.0 / x * myPow(x, y + 1);
+    return fib(n - 1) + fib(n - 2);
 }
