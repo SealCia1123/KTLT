@@ -16,4 +16,12 @@ void input(int arr[MAX_SIZE][MAX_SIZE], int n)
     int col1 = 0, col2 = n - 1;
 }
 
-void output(const int arr[MAX_SIZE][MAX_SIZE], int n);
+void output(const int arr[MAX_SIZE][MAX_SIZE], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+            cout << arr[i][j] << "\t";
+        cout << endl;
+    }
+}
