@@ -15,8 +15,10 @@ int main()
 int myReverse(int n)
 {
     int res = 0;
-    if (n < 10)
+    if (n == 0)
         return n;
-    res = myReverse(n / 10);
+    int temp = n % 10;
+    res = res * 10 + temp;
+    myReverse(n / 10);
     return res;
 }
