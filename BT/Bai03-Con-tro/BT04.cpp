@@ -8,6 +8,7 @@ int main()
     for (int i = 0; i < 30; i++)
         p[i] = rand() % (10 - 1 + 1) + 1;
 
+    cout << "Cac phan tu la so le trong mang: ";
     for (int i = 0; i < 30; i++)
     {
         if (*(p + i) % 2 == 1)
