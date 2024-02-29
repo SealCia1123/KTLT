@@ -11,7 +11,7 @@ int main()
     cout << "Nhap phan tu vao mang: ";
     for (int i = 0; i < n; i++)
         cin >> arr[i];
-    cout << "Tong phan tu cua mang: " << sumOfArr(arr, n) << endl;
+    cout << "Tong phan tu cua mang: " << sumOfArr(arr, n - 1) << endl;
     return 0;
 }
 
@@ -19,5 +19,5 @@ int sumOfArr(int arr[], int n)
 {
     if (n == 0)
         return arr[0];
-    return arr[n - 1] + sumOfArr(arr, n - 1);
+    return arr[n] + sumOfArr(arr, n - 1);
 }
