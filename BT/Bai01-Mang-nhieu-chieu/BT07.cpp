@@ -4,17 +4,17 @@
 #define MAX_ROW 10
 using namespace std;
 
-void inputArr(int arr[MAX_COL][MAX_ROW], int row, int col);
+void inputArr(int arr[MAX_ROW][MAX_COL], int row, int col);
 
-void output(const int arr[MAX_COL][MAX_ROW], int row, int col);
+void output(const int arr[MAX_ROW][MAX_COL], int row, int col);
 
-double averangeValue(const int arr[MAX_COL][MAX_ROW], int row, int col);
+double averangeValue(const int arr[MAX_ROW][MAX_COL], int row, int col);
 
-int findValue(const int arr[MAX_COL][MAX_ROW], int row, int col, const int value);
+int findValue(const int arr[MAX_ROW][MAX_COL], int row, int col, const int value);
 
-void swapTwoElements(int arr[MAX_COL][MAX_ROW], int row, int col, int x, int y);
+void swapTwoElements(int arr[MAX_ROW][MAX_COL], int row, int col, int x, int y);
 
-int multiply(const int arr[MAX_COL][MAX_ROW], int row, int col, int x);
+int multiply(const int arr[MAX_ROW][MAX_COL], int row, int col, int x);
 
 int main()
 {
@@ -47,7 +47,7 @@ int main()
     return 0;
 }
 
-void inputArr(int arr[MAX_COL][MAX_ROW], int row, int col)
+void inputArr(int arr[MAX_ROW][MAX_COL], int row, int col)
 {
     cout << "Nhap phan tu vao mang: ";
     for (int i = 0; i < row; i++)
@@ -57,7 +57,7 @@ void inputArr(int arr[MAX_COL][MAX_ROW], int row, int col)
     }
 }
 
-void output(const int arr[MAX_COL][MAX_ROW], int row, int col)
+void output(const int arr[MAX_ROW][MAX_COL], int row, int col)
 {
     for (int i = 0; i < row; i++)
     {
@@ -67,7 +67,7 @@ void output(const int arr[MAX_COL][MAX_ROW], int row, int col)
     }
 }
 
-double averangeValue(const int arr[MAX_COL][MAX_ROW], int row, int col)
+double averangeValue(const int arr[MAX_ROW][MAX_COL], int row, int col)
 {
     double result = 0;
     for (int i = 0; i < row; i++)
@@ -79,7 +79,7 @@ double averangeValue(const int arr[MAX_COL][MAX_ROW], int row, int col)
     return result;
 }
 
-int findValue(const int arr[MAX_COL][MAX_ROW], int row, int col, const int value)
+int findValue(const int arr[MAX_ROW][MAX_COL], int row, int col, const int value)
 {
     for (int i = 0; i < row; i++)
     {
@@ -92,7 +92,7 @@ int findValue(const int arr[MAX_COL][MAX_ROW], int row, int col, const int value
     return INT_MIN;
 }
 
-void swapTwoElements(int arr[MAX_COL][MAX_ROW], int row, int col, int x, int y)
+void swapTwoElements(int arr[MAX_ROW][MAX_COL], int row, int col, int x, int y)
 {
     for (int i = 0; i < row; i++)
     {
@@ -117,7 +117,7 @@ void swapTwoElements(int arr[MAX_COL][MAX_ROW], int row, int col, int x, int y)
     }
 }
 
-int multiply(const int arr[MAX_COL][MAX_ROW], int row, int col, int x)
+int multiply(const int arr[MAX_ROW][MAX_COL], int row, int col, int x)
 {
     int result = 1;
     for (int i = 0; i < row; i++)

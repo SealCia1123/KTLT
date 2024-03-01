@@ -15,7 +15,7 @@ void input(int arr[MAX_SIZE][MAX_SIZE], int n)
 {
     int row1 = 0, row2 = n - 1;
     int col1 = 0, col2 = n - 1;
-    while (row1 <= row2 && col1 <= col1)
+    while (row1 <= row2 && col1 <= col2)
     {
     }
 }
