@@ -29,11 +29,18 @@ void input(int arr[MAX_SIZE][MAX_SIZE], int n)
         for (int i = h1; i <= h2; i++)
             arr[i][c2] = count++;
         --c2;
-        for (int i = c2; i >= c1; i--)
-            arr[h2][i] = count++;
-        --h2;
-        for (int i = h2; i >= h1; i--)
-            arr[c1][i] = count++;
+        if (c1 <= c2)
+        {
+            for (int i = c2; i >= c1; i--)
+                arr[h2][i] = count++;
+            --h2;
+        }
+        if (h1 <= h2)
+        {
+            for (int i = h2; i >= h1; i--)
+                arr[i][c1] = count++;
+            ++c1;
+        }
     }
 }
 
