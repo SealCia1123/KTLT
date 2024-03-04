@@ -19,27 +19,18 @@ int main()
 
 void input(int arr[MAX_SIZE][MAX_SIZE], int n)
 {
+    int row1 = 0, row2 = n - 1, col1 = 0, col2 = n - 1;
     int count = 1;
-    int h1 = 0, h2 = n - 1, c1 = 0, c2 = n - 1;
-    while (h1 <= h2 && c1 <= c2)
+    while (row1 <= row2 && col1 <= col2)
     {
-        for (int i = c1; i <= c2; i++)
-            arr[h1][i] = count++;
-        h1++;
-        for (int i = h1; i <= h2; i++)
-            arr[i][c2] = count++;
-        --c2;
-        if (c1 <= c2)
+        for (int i = col1; i <= col2; i++)
+            arr[row1][i] = count++;
+        ++row1;
+        for (int i = row1; i <= row2; i++)
+            arr[i][col2] = count++;
+        --col2;
+        if (col1 <= col2)
         {
-            for (int i = c2; i >= c1; i--)
-                arr[h2][i] = count++;
-            --h2;
-        }
-        if (h1 <= h2)
-        {
-            for (int i = h2; i >= h1; i--)
-                arr[i][c1] = count++;
-            ++c1;
         }
     }
 }
