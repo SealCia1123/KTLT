@@ -31,6 +31,15 @@ void input(int arr[MAX_SIZE][MAX_SIZE], int n)
         --col2;
         if (col1 <= col2)
         {
+            for (int i = col2; i >= col1; i--)
+                arr[row2][i] = count++;
+            --row2;
+        }
+        if (row1 <= row2)
+        {
+            for (int i = row2; i >= row1; i--)
+                arr[i][col1] = count++;
+            ++col1;
         }
     }
 }
