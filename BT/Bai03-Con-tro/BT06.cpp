@@ -16,6 +16,7 @@ int main()
     int *newArr = reversedArr(arr, n);
     for (int i = 0; i < n; i++)
         cout << newArr[i] << " ";
+    cout << endl;
     return 0;
 }
 
