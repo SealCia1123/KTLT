@@ -1,4 +1,6 @@
 #include <iostream>
+#define MAX 10
+#define MIN 1
 using namespace std;
 
 void allocate_mem(int ***mt, int row, int col);
@@ -19,20 +21,26 @@ int main()
     cout << "Nhap so hang va so cot: ";
     cin >> row >> col;
     int **mt1, **mt2;
+
     allocate_mem(&mt1, row, col);
     allocate_mem(&mt2, row, col);
+
     generateRandomArr(mt1, row, col);
     generateRandomArr(mt2, row, col);
+
     print(mt1, row, col);
     print(mt2, row, col);
+
     int **sumMatrix = addMatrix(mt1, mt2, row, col);
     int **mulMatrix = multiplyMatrix(mt1, mt2, row, col);
     print(sumMatrix, row, col);
     print(mulMatrix, row, col);
+
     free_mem(mt1, row, col);
     free_mem(mt2, row, col);
     free_mem(sumMatrix, row, col);
     free_mem(mulMatrix, row, col);
+    return 0;
 }
 
 void allocate_mem(int ***mt, int row, int col)
@@ -47,7 +55,7 @@ void generateRandomArr(int **arr, int row, int col)
     for (int i = 0; i < row; i++)
     {
         for (int j = 0; j < col; j++)
-            arr[i][j] = rand() % (10 - 1 + 1) + 1;
+            arr[i][j] = rand() % (MAX - MIN + 1) + MIN;
     }
 }
 
