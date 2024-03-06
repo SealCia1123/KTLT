@@ -13,15 +13,42 @@ int main()
     cout << "Nhap vao 2 chuoi: ";
     cin.getline(s1, MAX_SIZE);
     cin.getline(s2, MAX_SIZE);
-    compareStr(s1, s2);
 
-    capitalizeStr(s1);
-    capitalizeStr(s2);
-    cout << "Chuoi thu nhat sau khi viet hoa: " << s1 << endl;
-    cout << "Chuoi thu hai sau khi viet hoa: " << s2 << endl;
+    cout << "1. So sanh do dai hai chuoi\n";
+    cout << "2. In hoa ky tu dau moi tu cua chuoi\n";
+    cout << "3. Noi hai chuoi\n";
+    int choice;
+    cout << "Nhap vao lua chon: ";
+    cin >> choice;
+    switch (choice)
+    {
+    case 1:
+    {
+        cout << "SO SANH DO DAI HAI CHUOI\n";
+        compareStr(s1, s2);
+        break;
+    }
+    case 2:
+    {
+        cout << "IN HOA KY TU DAU MOI CHUOI\n";
+        capitalizeStr(s1);
+        capitalizeStr(s2);
+        cout << "Chuoi thu nhat sau khi viet hoa: " << s1 << endl;
+        cout << "Chuoi thu hai sau khi viet hoa: " << s2 << endl;
+        break;
+    }
+    case 3:
+    {
+        cout << "NOI HAI CHUOI\n";
+        s1 = strcat(s1, s2);
+        cout << "Chuoi sau khi noi: " << s1 << endl;
+        break;
+    }
+    default:
+        cout << "Lua chon khong hop le\n";
+        return 0;
+    }
 
-    s1 = strcat(s1, s2);
-    cout << "Chuoi sau khi noi: " << s1 << endl;
     return 0;
 }
 
