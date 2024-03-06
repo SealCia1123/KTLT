@@ -8,11 +8,14 @@ int *listFibonacci(int n);
 int main()
 {
     int n;
+    cout << "Nhap vao n: ";
     cin >> n;
     int *arr = listFibonacci(n);
+    cout << "Day fibonacci: ";
     for (int i = 0; i < n; i++)
         cout << arr[i] << "\t";
     cout << endl;
+    delete[] arr;
     return 0;
 }
 

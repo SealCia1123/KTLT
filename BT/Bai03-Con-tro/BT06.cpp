@@ -17,6 +17,7 @@ int main()
     for (int i = 0; i < n; i++)
         cout << newArr[i] << " ";
     cout << endl;
+    delete[] newArr;
     return 0;
 }
 
