@@ -4,7 +4,7 @@ using namespace std;
 
 void input(int **arr, int row, int col);
 
-void printArr(int **arr, int row, int col);
+void printArr(const int *const *const arr, int row, int col);
 
 bool isPrime(int n);
 
@@ -39,7 +39,7 @@ void input(int **arr, int row, int col)
     }
 }
 
-void printArr(int **arr, int row, int col)
+void printArr(const int *const *const arr, int row, int col)
 {
     for (int i = 0; i < row; i++)
     {

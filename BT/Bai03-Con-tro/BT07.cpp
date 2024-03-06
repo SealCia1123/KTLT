@@ -16,7 +16,7 @@ int main()
     if (find(arr, n, x) == NULL)
         cout << "Khong tim thay gia tri trong mang\n";
     else
-        cout << "Tim thay gia tri tai vi tri thu " << find(arr, n, x) + 1 << " trong mang\n";
+        cout << "Tim thay gia tri tai vi tri " << find(arr, n, x) << " trong mang\n";
     return 0;
 }
 
@@ -30,5 +30,5 @@ int *find(int *arr, int n, int value)
             p = arr + i;
         }
     }
-    return NULL;
+    return p;
 }
