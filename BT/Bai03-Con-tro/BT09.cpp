@@ -5,6 +5,7 @@ using namespace std;
 void input(int **arr, int row, int col);
 
 void printArr(int **arr, int row, int col);
+
 bool isPrime(int n);
 
 int sumOfPrimeNumber(int **arr, int row, int col);

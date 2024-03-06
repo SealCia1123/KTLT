@@ -18,6 +18,7 @@ int main()
         cout << newArr[i] << " ";
     cout << endl;
     delete[] newArr;
+    newArr = nullptr;
     return 0;
 }
 
