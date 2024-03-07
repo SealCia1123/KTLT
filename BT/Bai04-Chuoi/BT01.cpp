@@ -48,7 +48,8 @@ int main()
         cout << "Lua chon khong hop le\n";
         return 0;
     }
-
+    delete[] s1;
+    delete[] s2;
     return 0;
 }
 
