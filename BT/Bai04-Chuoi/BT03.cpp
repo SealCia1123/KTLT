@@ -19,6 +19,8 @@ void lowerCase(char *c);
 
 void upperCaseEachWord(char *c);
 
+void countWords(char *c);
+
 int main()
 {
     char *c = new char[MAX_SIZE];
@@ -89,6 +91,10 @@ int main()
     {
         upperCaseEachWord(c);
         cout << "Chuoi khi in hoa moi tu: " << c << endl;
+        break;
+    }
+    case 'i':
+    {
         break;
     }
     default:
@@ -197,4 +203,8 @@ void upperCaseEachWord(char *c)
         if (c[i] == ' ' && (c[i + 1] >= 97 && c[i + 1] <= 122))
             c[i + 1] -= 32;
     }
+}
+
+void countWords(char *c)
+{
 }
