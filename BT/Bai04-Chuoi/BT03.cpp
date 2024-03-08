@@ -15,6 +15,10 @@ int countLowerCase(char *c);
 
 void upperCase(char *c);
 
+void lowerCase(char *c);
+
+void upperCaseEachWord(char *c);
+
 int main()
 {
     char *c = new char[MAX_SIZE];
@@ -73,6 +77,18 @@ int main()
     {
         upperCase(c);
         cout << "Chuoi sau khi in hoa: " << c << endl;
+        break;
+    }
+    case 'g':
+    {
+        lowerCase(c);
+        cout << "Chuoi sau khi in thuong: " << c << endl;
+        break;
+    }
+    case 'h':
+    {
+        upperCaseEachWord(c);
+        cout << "Chuoi khi in hoa moi tu: " << c << endl;
         break;
     }
     default:
@@ -159,5 +175,26 @@ void upperCase(char *c)
     {
         if (c[i] >= 97 && c[i] <= 122)
             c[i] -= 32;
+    }
+}
+
+void lowerCase(char *c)
+{
+
+    for (int i = 0; i < strlen(c); i++)
+    {
+        if (c[i] >= 65 && c[i] <= 90)
+            c[i] += 32;
+    }
+}
+
+void upperCaseEachWord(char *c)
+{
+    if (c[0] >= 97 && c[0] <= 122)
+        c[0] -= 32;
+    for (int i = 0; i < strlen(c) - 1; i++)
+    {
+        if (c[i] == ' ' && (c[i + 1] >= 97 && c[i + 1] <= 122))
+            c[i + 1] -= 32;
     }
 }
