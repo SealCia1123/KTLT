@@ -20,5 +20,5 @@ double myPow(int x, int y)
     else if (y > 0)
         return (double)x * myPow(x, y - 1);
     else
-        return (double)1 / (x * myPow(x, y + 1));
+        return (double)1 / x * myPow(x, y + 1);
 }
