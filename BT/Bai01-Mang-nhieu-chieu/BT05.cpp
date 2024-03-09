@@ -24,8 +24,8 @@ int main()
     }
 
     int tongDuongCheoChinh = 0, tongDuongCheoPhu = 0;
-    for (int i = 0, j = 0; i < n; i++, j++)
-        tongDuongCheoChinh += arr[i][j];
+    for (int i = 0; i < n; i++)
+        tongDuongCheoChinh += arr[i][i];
     cout << "Tong duong cheo chinh: " << tongDuongCheoChinh << endl;
 
     for (int i = 0; i < n; i++)
