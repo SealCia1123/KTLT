@@ -13,6 +13,7 @@ int main()
     for (int i = 0; i < n; i++)
         cin >> arr[i];
 
+    cout << "Mang da nhap la: ";
     for (int i = 0; i < n; i++)
         cout << arr[i] << " ";
     cout << endl
@@ -21,12 +22,12 @@ int main()
     return 0;
 }
 
-int findMin(const int arr[], int first, int last)
+int findMin(const int arr[], int start, int end)
 {
-    if (first == last)
-        return arr[first];
-    int min = findMin(arr, first + 1, last);
-    if (arr[first] < min)
-        min = arr[first];
+    if (start == end)
+        return arr[start];
+    int min = findMin(arr, start + 1, end);
+    if (arr[start] < min)
+        min = arr[start];
     return min;
 }
