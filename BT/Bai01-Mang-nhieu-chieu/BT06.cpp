@@ -16,11 +16,11 @@ int main()
     int firstRow, firstCol, secondRow, secondCol;
     int firstArr[MAX_ROW][MAX_COL];
     int secondArr[MAX_ROW][MAX_COL];
+    int choice;
     inputArr(firstArr, firstRow, firstCol);
     inputArr(secondArr, secondRow, secondCol);
     printArr(firstArr, firstRow, firstCol);
     printArr(secondArr, secondRow, secondCol);
-    int choice;
     cout << "1. Tinh tong hai ma tran\n";
     cout << "2. Tinh tich hai ma tran\n";
     switch (choice)
