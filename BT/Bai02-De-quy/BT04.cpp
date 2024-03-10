@@ -17,8 +17,11 @@ double myPow(int x, int y)
 {
     if (y == 0)
         return 1;
-    else if (y > 0)
+    else if (y == 1)
+        return x;
+
+    if (y > 0)
         return (double)x * myPow(x, y - 1);
     else
-        return (double)1 / x * myPow(x, y + 1);
+        return (1.0 / x) * myPow(x, y + 1);
 }
