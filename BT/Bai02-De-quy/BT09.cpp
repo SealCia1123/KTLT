@@ -6,8 +6,9 @@ int binToDec(int n);
 int main()
 {
     int n;
+    cout << "Nhap so o he nhi phan: ";
     cin >> n;
-    cout << binToDec(n) << endl;
+    cout << "So o he thap phan: " << binToDec(n) << endl;
     return 0;
 }
 
