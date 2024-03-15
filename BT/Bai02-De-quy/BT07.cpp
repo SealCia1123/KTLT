@@ -20,6 +20,7 @@ int sumEvenNum(int n)
             return n;
         return 0;
     }
+
     int temp = n % 10;
     if (temp % 2 == 0)
         return temp + sumEvenNum(n / 10);
