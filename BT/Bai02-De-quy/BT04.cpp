@@ -1,5 +1,5 @@
-// Viet ham tinh luy thua x^y
 #include <iostream>
+
 using namespace std;
 
 double myPow(int x, int y);
