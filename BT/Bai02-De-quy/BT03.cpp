@@ -1,4 +1,3 @@
-// Viet ham tinh gia tri Fibonacci cua so nguyen khong am
 #include <iostream>
 using namespace std;
 

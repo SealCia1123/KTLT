@@ -3,6 +3,8 @@ using namespace std;
 
 int myReverse(int n);
 
+int res = 0;
+
 int main()
 {
 	int n;
@@ -14,11 +16,9 @@ int main()
 
 int myReverse(int n)
 {
-	int res = 0;
 	if (n == 0)
-		return n;
-	int temp = n % 10;
-	res = res * 10 + temp;
-	myReverse(n / 10);
-	return res;
+		return res;
+
+	res = res * 10 + (n % 10);
+	return myReverse(n / 10);
 }
