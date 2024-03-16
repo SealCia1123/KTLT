@@ -19,7 +19,6 @@ int myReverse(int n)
 {
 	if (n == 0)
 		return res;
-
 	res = res * 10 + (n % 10);
 	return myReverse(n / 10);
 }

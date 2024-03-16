@@ -1,4 +1,3 @@
-#include <climits>
 #include <iostream>
 
 using namespace std;
@@ -16,16 +15,10 @@ int main()
 
 int sumEvenNum(int n)
 {
-	if (n < 10)
-	{
-		if (n % 2 == 0)
-		{
-			return n;
-		}
+	if (n == 0)
 		return 0;
-	}
 
 	if ((n % 10) % 2 == 0)
 		return (n % 10) + sumEvenNum(n / 10);
-	return 0 + sumEvenNum(n / 10);
+	return sumEvenNum(n / 10);
 }
