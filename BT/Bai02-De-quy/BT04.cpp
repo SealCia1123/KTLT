@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 double myPow(int x, int y);

@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 int findMin(const int arr[], int first, int last);

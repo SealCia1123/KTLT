@@ -1,5 +1,6 @@
 #include <iostream>
 #define MAX_SIZE 10
+
 using namespace std;
 
 int sumOfArr(const int arr[], int n);
