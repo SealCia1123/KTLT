@@ -55,7 +55,17 @@ bool isPalindrome(char *const c)
 	for (int i = 0; i < strlen(c); i++)
 	{
 		if (originStr[i] != reversedStr[i])
+		{
+			delete[] originStr;
+			delete[] reversedStr;
+			originStr = NULL;
+			reversedStr = NULL;
 			return false;
+		}
 	}
+	delete[] originStr;
+	delete[] reversedStr;
+	originStr = NULL;
+	reversedStr = NULL;
 	return true;
 }
