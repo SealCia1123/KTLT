@@ -26,9 +26,7 @@ int *find(int *arr, int n, int value)
 	for (int i = 0; i < n; i++)
 	{
 		if (arr[i] == value)
-		{
-			p = arr + i;
-		}
+			return (p = arr + i);
 	}
 	return p;
 }

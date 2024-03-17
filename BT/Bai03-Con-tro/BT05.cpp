@@ -16,7 +16,7 @@ int main()
 		cout << arr[i] << "\t";
 	cout << endl;
 	delete[] arr;
-	arr = nullptr;
+	arr = NULL;
 	return 0;
 }
 

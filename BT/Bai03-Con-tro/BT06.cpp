@@ -19,7 +19,7 @@ int main()
 	cout << endl;
 
 	delete[] newArr;
-	newArr = nullptr;
+	newArr = NULL;
 	return 0;
 }
 
