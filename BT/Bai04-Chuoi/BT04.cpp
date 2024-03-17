@@ -1,50 +1,61 @@
 #include <cstring>
 #include <iostream>
-#define MAX_SIZE 30
+#define MAX_SIZE 20
 using namespace std;
 
-void loweringCase(char *c);
+char *loweringCase(char *const c);
 
-bool isPalindrome(char *c);
+bool isPalindrome(char *const c);
 
 int main()
 {
 	char *s = new char[MAX_SIZE];
 	cout << "Nhap vao chuoi: ";
 	cin.getline(s, MAX_SIZE);
-	cout << s << endl;
 
 	if (isPalindrome(s))
 		cout << "Chuoi " << s << " la chuoi Palindrome\n";
 	else
 		cout << "Chuoi " << s << " khong phai la chuoi Palindrome\n";
+
 	delete[] s;
+	s = NULL;
 	return 0;
 }
 
-void loweringCase(char *c)
+char *loweringCase(char *const c)
 {
+	char *res = new char[strlen(c)];
 	for (int i = 0; i < strlen(c); i++)
+		res[i] = c[i];
+
+	for (int i = 0; i < strlen(res); i++)
 	{
-		if (c[i] >= 'A' && c[i] <= 'Z')
-			c[i] += 32;
+		if (res[i] >= 'A' && res[i] <= 'Z')
+			res[i] += 32;
 	}
+	return res;
 }
 
-bool isPalindrome(char *c)
+bool isPalindrome(char *const c)
 {
-	char *temp = new char[MAX_SIZE];
-	for (int j = strlen(c) - 1, i = 0; i >= 0; i++, j--)
-		temp[i] = c[j];
+	char *originStr = new char[strlen(c)];
+	char *reversedStr = new char[strlen(c)];
+
+	for (int i = 0; i < strlen(c); i++)
+		originStr[i] = c[i];
+
+	// Nhap chuoi reversedStr nguoc tu chuoi goc
+	for (int i = 0, j = strlen(c) - 1; i < strlen(c); i++, j--)
+		reversedStr[i] = c[j];
+
+	reversedStr = loweringCase(reversedStr);
+	originStr = loweringCase(originStr);
 
 	for (int i = 0; i < strlen(c); i++)
 	{
-		if (c[i] != temp[i])
-		{
-			/* delete[] temp; */
+		if (originStr[i] != reversedStr[i])
 			return false;
-		}
 	}
-	/* delete[] temp; */
 	return true;
 }
