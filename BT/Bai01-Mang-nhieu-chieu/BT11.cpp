@@ -3,13 +3,13 @@ using namespace std;
 
 void printAvailableSeat(const int seat[13][6]);
 
-void input(char userSeat[]);
+void input(int &userRow, char &userCol);
 
-void bookBusinessClass(int seat[13][6], char userSeat[]);
+void bookBusinessClass(int seat[13][6], int userRow, char userCol);
 
-void bookEconomyClass(int seat[13][6], char userSeat[]);
+void bookEconomyClass(int seat[13][6], int userRow, char userCol);
 
-void bookCheapClass(int seat[13][6], char userSeat[]);
+void bookCheapClass(int seat[13][6], int userRow, char userCol);
 
 int main()
 {
@@ -28,29 +28,45 @@ int main()
 		{0, 0, 1, 1, 0, 1},
 		{0, 0, 0, 0, 1, 0}};
 
-	int choice, row, col;
-	char userSeat[2];
+	int choice, row, col, userRow;
+	char userCol;
 	while (true)
 	{
 		printAvailableSeat(seat);
-		cout << "Ban muon dat ve loai nao (1. Hang thuong gia, 2. Pho thong, 3. Tiet kiem): ";
+		cout << "\n=========Menu dat ve may bay=========\n";
+		cout << "1. Dat ve hang THUONG GIA\n";
+		cout << "2. Dat ve hang PHO THONG\n";
+		cout << "3. Dat ve hang TIET KIEM\n";
+		cout << "0. Thoat chuong trinh\n";
+		cout << "Nhap vao lua chon cua ban: ";
 		cin >> choice;
 		switch (choice)
 		{
 		case 1:
 		{
-			input(userSeat);
-			bookBusinessClass(seat, userSeat);
+			input(userRow, userCol);
+			bookBusinessClass(seat, userRow, userCol);
 			break;
 		}
 		case 2:
 		{
+			input(userRow, userCol);
+			bookEconomyClass(seat, userRow, userCol);
 			break;
 		}
 		case 3:
 		{
+			input(userRow, userCol);
+			bookCheapClass(seat, userRow, userCol);
 			break;
 		}
+
+		case 0:
+		{
+			cout << "Ket thuc chuong trinh\n";
+			return 0;
+		}
+
 		default:
 			cout << "Lua chon khong hop le\n";
 		}
@@ -83,43 +99,78 @@ void printAvailableSeat(const int seat[13][6])
 	}
 }
 
-void input(char userSeat[])
+void input(int &userRow, char &userCol)
 {
 	do
 	{
-		cout << "Nhap vao vi tri ghe ban muon chon: ";
-		cin >> userSeat;
-		if ((userSeat[0] < '0' || userSeat[0] > '9') || (userSeat[1] < 'A' || userSeat[1] > 'Z'))
+		cout << "Nhap vao ghe o hang thu: ";
+		cin >> userRow;
+		cout << "Nhap vao ghe o cot chu: ";
+		cin >> userCol;
+		if ((userRow < 1 || userRow > 13) || !((userCol >= 'A' && userCol <= 'Z') || (userCol >= 'a' && userCol <= 'z')))
 			cout << "Nhap lai vi tri ghe can chon."
 				 << "\nChon theo cu phap [Hang thu ...][Cot chu ...]"
-				 << "\nVi du: 1B, 2C, 4F\n";
-	} while ((userSeat[0] < '1' || userSeat[0] > '9') || (userSeat[1] < 'A' || userSeat[1] > 'Z'));
+				 << "\nVi du: 1B, 2C, 3F\n";
+	} while ((userRow < 1 || userRow > 13) || !((userCol >= 'A' && userCol <= 'Z') || (userCol >= 'a' && userCol <= 'z')));
 }
 
-void bookBusinessClass(int seat[13][6], char userSeat[])
+void bookBusinessClass(int seat[13][6], int userRow, char userCol)
 {
-	while (userSeat[0] < '1' || userSeat[0] > '2')
+	while (userRow < 1 || userRow > 2)
 	{
 		cout << "Ghe hang thuong gia chi gom hang thu 1 va hang thu 2\n";
-		input(userSeat);
+		input(userRow, userCol);
+	}
+	int row = --userRow, col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
+	if (seat[row][col] == 1)
+	{
+		cout << "Cho quy khach chon da co nguoi dat, quy khach vui long chon cho moi\n";
+		input(userRow, userCol);
+	}
+	else
+	{
+		seat[row][col] = 1;
+		cout << "Dat ve thanh cong\n";
 	}
 }
 
-void bookEconomyClass(int seat[13][6], char userSeat[])
+void bookEconomyClass(int seat[13][6], int userRow, char userCol)
 {
 
-	while (userSeat[0] < '3' || userSeat[0] > '7')
+	while (userRow < 3 || userRow > 7)
 	{
-		cout << "Ghe hang thuong gia chi gom hang thu 1 va hang thu 2\n";
-		input(userSeat);
+		cout << "Ghe hang pho thong tu hang thu 3 den hang thu 7\n";
+		input(userRow, userCol);
+	}
+	int row = --userRow, col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
+	if (seat[row][col] == 1)
+	{
+		cout << "Cho quy khach chon da co nguoi dat, quy khach vui long chon cho moi\n";
+		input(userRow, userCol);
+	}
+	else
+	{
+		seat[row][col] = 1;
+		cout << "Dat ve thanh cong\n";
 	}
 }
 
-void bookCheapClass(int seat[13][6], char userSeat[])
+void bookCheapClass(int seat[13][6], int userRow, char userCol)
 {
-	while (userSeat[0] < '8')
+	while (userRow < 8 || userRow > 13)
 	{
-		cout << "Ghe hang thuong gia chi gom hang thu 1 va hang thu 2\n";
-		input(userSeat);
+		cout << "Ghe hang tiet kiem tu hang thu 8 den hang thu 13\n";
+		input(userRow, userCol);
+	}
+	int row = --userRow, col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
+	if (seat[row][col] == 1)
+	{
+		cout << "Cho quy khach chon da co nguoi dat, quy khach vui long chon cho moi\n";
+		input(userRow, userCol);
+	}
+	else
+	{
+		seat[row][col] = 1;
+		cout << "Dat ve thanh cong\n";
 	}
 }
