@@ -14,7 +14,6 @@ void bookCheapClass(int seat[13][6], char *userRow, char userCol);
 
 int main()
 {
-	system("clear");
 	int seat[13][6] = {
 		{0, 0, 1, 0, 1, 1},
 		{0, 1, 0, 1, 0, 1},
@@ -34,6 +33,7 @@ int main()
 	char userCol, userRow[2];
 	while (true)
 	{
+		system("clear");
 		printAvailableSeat(seat);
 		cout << "\n=========Menu dat ve may bay=========\n";
 		cout << "1. Dat ve hang THUONG GIA\n";
