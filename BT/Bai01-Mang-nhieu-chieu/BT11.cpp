@@ -1,5 +1,4 @@
 #include <cstdlib>
-#include <cstring>
 #include <iostream>
 using namespace std;
 
@@ -118,7 +117,7 @@ void input(char *userRow, char &userCol)
 
 void bookBusinessClass(int seat[13][6], char *userRow, char userCol)
 {
-	while (strcmp(userRow, "1") < 0 || strcmp(userRow, "2") > 0)
+	while (atoi(userRow) < 1 || atoi(userRow) > 2)
 	{
 		cout << "Ghe hang THUONG GIA chi gom ghe tu hang 1 den hang 2 va cot tu A den F\n";
 		input(userRow, userCol);
@@ -140,7 +139,7 @@ void bookBusinessClass(int seat[13][6], char *userRow, char userCol)
 void bookEconomyClass(int seat[13][6], char *userRow, char userCol)
 {
 
-	while (strcmp(userRow, "3") < 0 || strcmp(userRow, "7") > 0)
+	while (atoi(userRow) < 3 || atoi(userRow) > 7)
 	{
 		cout << "Ghe hang PHO THONG chi gom ghe tu hang 3 den hang 7 va cot tu A den F\n";
 		input(userRow, userCol);
@@ -161,7 +160,7 @@ void bookEconomyClass(int seat[13][6], char *userRow, char userCol)
 
 void bookCheapClass(int seat[13][6], char *userRow, char userCol)
 {
-	while (strcmp(userRow, "8") < 0 || strcmp(userRow, "13") > 0)
+	while (atoi(userRow) < 8)
 	{
 		cout << "Ghe hang TIET KIEM chi gom ghe tu hang 8 den hang 13 va cot tu A den F\n";
 		input(userRow, userCol);
