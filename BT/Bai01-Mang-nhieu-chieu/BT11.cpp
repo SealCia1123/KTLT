@@ -125,16 +125,16 @@ void bookBusinessClass(int seat[13][6], char *userRow, char userCol)
 	}
 	int row = atoi(userRow) - 1;
 	int col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
-	if (seat[row][col] == 1)
+
+	while (seat[row][col] == 1)
 	{
 		cout << "Cho quy khach chon da co nguoi dat, quy khach vui long chon cho moi\n";
 		input(userRow, userCol);
+		row = atoi(userRow) - 1;
+		col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
 	}
-	else
-	{
-		seat[row][col] = 1;
-		cout << "Dat ve thanh cong\n";
-	}
+	seat[row][col] = 1;
+	cout << "Dat ve thanh cong\n";
 }
 
 void bookEconomyClass(int seat[13][6], char *userRow, char userCol)
@@ -147,16 +147,16 @@ void bookEconomyClass(int seat[13][6], char *userRow, char userCol)
 	}
 	int row = atoi(userRow) - 1;
 	int col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
-	if (seat[row][col] == 1)
+
+	while (seat[row][col] == 1)
 	{
 		cout << "Cho quy khach chon da co nguoi dat, quy khach vui long chon cho moi\n";
 		input(userRow, userCol);
+		row = atoi(userRow) - 1;
+		col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
 	}
-	else
-	{
-		seat[row][col] = 1;
-		cout << "Dat ve thanh cong\n";
-	}
+	seat[row][col] = 1;
+	cout << "Dat ve thanh cong\n";
 }
 
 void bookCheapClass(int seat[13][6], char *userRow, char userCol)
@@ -168,14 +168,14 @@ void bookCheapClass(int seat[13][6], char *userRow, char userCol)
 	}
 	int row = atoi(userRow) - 1;
 	int col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
-	if (seat[row][col] == 1)
+
+	while (seat[row][col] == 1)
 	{
 		cout << "Cho quy khach chon da co nguoi dat, quy khach vui long chon cho moi\n";
 		input(userRow, userCol);
+		row = atoi(userRow) - 1;
+		col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
 	}
-	else
-	{
-		seat[row][col] = 1;
-		cout << "Dat ve thanh cong\n";
-	}
+	seat[row][col] = 1;
+	cout << "Dat ve thanh cong\n";
 }
