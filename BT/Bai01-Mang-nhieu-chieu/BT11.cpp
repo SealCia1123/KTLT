@@ -1,15 +1,17 @@
+#include <cstdlib>
+#include <cstring>
 #include <iostream>
 using namespace std;
 
 void printAvailableSeat(const int seat[13][6]);
 
-void input(int &userRow, char &userCol);
+void input(char *userRow, char &userCol);
 
-void bookBusinessClass(int seat[13][6], int userRow, char userCol);
+void bookBusinessClass(int seat[13][6], char *userRow, char userCol);
 
-void bookEconomyClass(int seat[13][6], int userRow, char userCol);
+void bookEconomyClass(int seat[13][6], char *userRow, char userCol);
 
-void bookCheapClass(int seat[13][6], int userRow, char userCol);
+void bookCheapClass(int seat[13][6], char *userRow, char userCol);
 
 int main()
 {
@@ -28,8 +30,8 @@ int main()
 		{0, 0, 1, 1, 0, 1},
 		{0, 0, 0, 0, 1, 0}};
 
-	int choice, row, col, userRow;
-	char userCol;
+	int choice, row, col;
+	char userCol, userRow[2];
 	while (true)
 	{
 		printAvailableSeat(seat);
@@ -99,7 +101,7 @@ void printAvailableSeat(const int seat[13][6])
 	}
 }
 
-void input(int &userRow, char &userCol)
+void input(char *userRow, char &userCol)
 {
 	do
 	{
@@ -107,21 +109,22 @@ void input(int &userRow, char &userCol)
 		cin >> userRow;
 		cout << "Nhap vao ghe o cot chu: ";
 		cin >> userCol;
-		if ((userRow < 1 || userRow > 13) || !((userCol >= 'A' && userCol <= 'Z') || (userCol >= 'a' && userCol <= 'z')))
-			cout << "Nhap lai vi tri ghe can chon."
-				 << "\nChon theo cu phap [Hang thu ...][Cot chu ...]"
-				 << "\nVi du: 1B, 2C, 3F\n";
-	} while ((userRow < 1 || userRow > 13) || !((userCol >= 'A' && userCol <= 'Z') || (userCol >= 'a' && userCol <= 'z')));
+		if ((strcmp(userRow, "1") < 0 && strcmp(userRow, "13") > 0) || !((userCol >= 'A' && userCol <= 'Z') || (userCol >= 'a' && userCol <= 'z')))
+			cout << "Chon lai ghe, chon theo cu phap: Hang thu ..., Cot chu ...\n"
+				 << "Vi du: Ghe o hang hang thu: 1, 2, 3, ...\n"
+				 << "\t Ghe o cot chu: A, B, C, ...\n";
+	} while ((strcmp(userRow, "1") < 0 && strcmp(userRow, "13") > 0) || !((userCol >= 'A' && userCol <= 'Z') || (userCol >= 'a' && userCol <= 'z')));
 }
 
-void bookBusinessClass(int seat[13][6], int userRow, char userCol)
+void bookBusinessClass(int seat[13][6], char *userRow, char userCol)
 {
-	while (userRow < 1 || userRow > 2)
+	while (strcmp(userRow, "1") < 0 || strcmp(userRow, "2") > 0)
 	{
 		cout << "Ghe hang thuong gia chi gom hang thu 1 va hang thu 2\n";
 		input(userRow, userCol);
 	}
-	int row = --userRow, col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
+	int row = atoi(userRow) - 1;
+	int col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
 	if (seat[row][col] == 1)
 	{
 		cout << "Cho quy khach chon da co nguoi dat, quy khach vui long chon cho moi\n";
@@ -134,15 +137,16 @@ void bookBusinessClass(int seat[13][6], int userRow, char userCol)
 	}
 }
 
-void bookEconomyClass(int seat[13][6], int userRow, char userCol)
+void bookEconomyClass(int seat[13][6], char *userRow, char userCol)
 {
 
-	while (userRow < 3 || userRow > 7)
+	while (strcmp(userRow, "3") < 0 || strcmp(userRow, "7") > 0)
 	{
 		cout << "Ghe hang pho thong tu hang thu 3 den hang thu 7\n";
 		input(userRow, userCol);
 	}
-	int row = --userRow, col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
+	int row = atoi(userRow) - 1;
+	int col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
 	if (seat[row][col] == 1)
 	{
 		cout << "Cho quy khach chon da co nguoi dat, quy khach vui long chon cho moi\n";
@@ -155,14 +159,15 @@ void bookEconomyClass(int seat[13][6], int userRow, char userCol)
 	}
 }
 
-void bookCheapClass(int seat[13][6], int userRow, char userCol)
+void bookCheapClass(int seat[13][6], char *userRow, char userCol)
 {
-	while (userRow < 8 || userRow > 13)
+	while (strcmp(userRow, "8") < 0 || strcmp(userRow, "13") > 0)
 	{
 		cout << "Ghe hang tiet kiem tu hang thu 8 den hang thu 13\n";
 		input(userRow, userCol);
 	}
-	int row = --userRow, col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
+	int row = atoi(userRow) - 1;
+	int col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
 	if (seat[row][col] == 1)
 	{
 		cout << "Cho quy khach chon da co nguoi dat, quy khach vui long chon cho moi\n";
