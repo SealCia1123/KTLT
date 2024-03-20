@@ -14,6 +14,7 @@ void bookCheapClass(int seat[13][6], char *userRow, char userCol);
 
 int main()
 {
+	system("clear");
 	int seat[13][6] = {
 		{0, 0, 1, 0, 1, 1},
 		{0, 1, 0, 1, 0, 1},
@@ -79,7 +80,6 @@ int main()
 			cout << "Ket thuc chuong trinh\n";
 			return 0;
 		}
-		system("clear");
 	}
 }
 
