@@ -109,29 +109,29 @@ void input(char *userRow, char &userCol)
 		cin >> userRow;
 		cout << "Nhap vao ghe o cot chu: ";
 		cin >> userCol;
-		if ((strcmp(userRow, "1") < 0 && strcmp(userRow, "13") > 0) || !((userCol >= 'A' && userCol <= 'Z') || (userCol >= 'a' && userCol <= 'z')))
-			cout << "Chon lai ghe, chon theo cu phap: Hang thu ..., Cot chu ...\n"
-				 << "Vi du: Ghe o hang hang thu: 1, 2, 3, ...\n"
-				 << "\t Ghe o cot chu: A, B, C, ...\n";
-	} while ((strcmp(userRow, "1") < 0 && strcmp(userRow, "13") > 0) || !((userCol >= 'A' && userCol <= 'Z') || (userCol >= 'a' && userCol <= 'z')));
+		if (!(atoi(userRow) >= 1 && atoi(userRow) <= 13) || !((userCol >= 'A' && userCol <= 'F') || (userCol >= 'a' && userCol <= 'f')))
+			cout << "Chon lai ghe, chon theo cu phap: Hang thu, Cot chu\n"
+				 << "Vi du: Ghe o hang hang thu: 1, 2, 3,..., 13\n"
+				 << "       Ghe o cot chu: A, B, C,..., F\n";
+	} while (!(atoi(userRow) >= 1 && atoi(userRow) <= 13) || !((userCol >= 'A' && userCol <= 'F') || (userCol >= 'a' && userCol <= 'f')));
 }
 
 void bookBusinessClass(int seat[13][6], char *userRow, char userCol)
 {
 	while (strcmp(userRow, "1") < 0 || strcmp(userRow, "2") > 0)
 	{
-		cout << "Ghe hang thuong gia chi gom hang thu 1 va hang thu 2\n";
+		cout << "Ghe hang THUONG GIA chi gom ghe tu hang 1 den hang 2 va cot tu A den F\n";
 		input(userRow, userCol);
 	}
 	int row = atoi(userRow) - 1;
-	int col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
+	int col = ((userCol >= 'A' && userCol <= 'F') ? (int)userCol - 65 : (int)userCol - 97);
 
 	while (seat[row][col] == 1)
 	{
 		cout << "Cho quy khach chon da co nguoi dat, quy khach vui long chon cho moi\n";
 		input(userRow, userCol);
 		row = atoi(userRow) - 1;
-		col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
+		col = ((userCol >= 'A' && userCol <= 'F') ? (int)userCol - 65 : (int)userCol - 97);
 	}
 	seat[row][col] = 1;
 	cout << "Dat ve thanh cong\n";
@@ -142,18 +142,18 @@ void bookEconomyClass(int seat[13][6], char *userRow, char userCol)
 
 	while (strcmp(userRow, "3") < 0 || strcmp(userRow, "7") > 0)
 	{
-		cout << "Ghe hang pho thong tu hang thu 3 den hang thu 7\n";
+		cout << "Ghe hang PHO THONG chi gom ghe tu hang 3 den hang 7 va cot tu A den F\n";
 		input(userRow, userCol);
 	}
 	int row = atoi(userRow) - 1;
-	int col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
+	int col = ((userCol >= 'A' && userCol <= 'F') ? (int)userCol - 65 : (int)userCol - 97);
 
 	while (seat[row][col] == 1)
 	{
 		cout << "Cho quy khach chon da co nguoi dat, quy khach vui long chon cho moi\n";
 		input(userRow, userCol);
 		row = atoi(userRow) - 1;
-		col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
+		col = ((userCol >= 'A' && userCol <= 'F') ? (int)userCol - 65 : (int)userCol - 97);
 	}
 	seat[row][col] = 1;
 	cout << "Dat ve thanh cong\n";
@@ -163,18 +163,18 @@ void bookCheapClass(int seat[13][6], char *userRow, char userCol)
 {
 	while (strcmp(userRow, "8") < 0 || strcmp(userRow, "13") > 0)
 	{
-		cout << "Ghe hang tiet kiem tu hang thu 8 den hang thu 13\n";
+		cout << "Ghe hang TIET KIEM chi gom ghe tu hang 8 den hang 13 va cot tu A den F\n";
 		input(userRow, userCol);
 	}
 	int row = atoi(userRow) - 1;
-	int col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
+	int col = ((userCol >= 'A' && userCol <= 'F') ? (int)userCol - 65 : (int)userCol - 97);
 
 	while (seat[row][col] == 1)
 	{
 		cout << "Cho quy khach chon da co nguoi dat, quy khach vui long chon cho moi\n";
 		input(userRow, userCol);
 		row = atoi(userRow) - 1;
-		col = ((userCol >= 'A' && userCol <= 'Z') ? (int)userCol - 65 : (int)userCol - 97);
+		col = ((userCol >= 'A' && userCol <= 'F') ? (int)userCol - 65 : (int)userCol - 97);
 	}
 	seat[row][col] = 1;
 	cout << "Dat ve thanh cong\n";
