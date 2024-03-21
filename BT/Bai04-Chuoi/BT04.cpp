@@ -3,9 +3,9 @@
 #define MAX_SIZE 20
 using namespace std;
 
-char *loweringCase(char *const c);
+char *loweringCase(const char *const c);
 
-bool isPalindrome(char *const c);
+bool isPalindrome(const char *const c);
 
 int main()
 {
@@ -23,7 +23,7 @@ int main()
 	return 0;
 }
 
-char *loweringCase(char *const c)
+char *loweringCase(const char *const c)
 {
 	char *res = new char[strlen(c)];
 	for (int i = 0; i < strlen(c); i++)
@@ -37,7 +37,7 @@ char *loweringCase(char *const c)
 	return res;
 }
 
-bool isPalindrome(char *const c)
+bool isPalindrome(const char *const c)
 {
 	char *originStr = new char[strlen(c)];
 	char *reversedStr = new char[strlen(c)];
