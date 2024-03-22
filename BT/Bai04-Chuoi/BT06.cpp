@@ -1,7 +1,7 @@
 #include <climits>
 #include <cstring>
 #include <iostream>
-#define MAX_CHAR 15
+#define MAX_SIZE 15
 using namespace std;
 
 int *split(char *s);
@@ -14,7 +14,7 @@ int countDays(int date, int month, int year);
 
 int main()
 {
-	char s[MAX_CHAR];
+	char s[MAX_SIZE];
 	// Mang chua [ngay][thang][nam]
 	int *dates, res;
 	do
