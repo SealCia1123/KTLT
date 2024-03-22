@@ -131,36 +131,40 @@ void input(char *userRow, char &userCol)
 void bookTicket(int seat[13][6], char *userRow, char userCol, int ticketType)
 {
 	// KT ticketType va cho vao TH tuong ung
+	int checkRow = atoi(userRow);
 	if (ticketType == 1)
 	{
-		while (atoi(userRow) < 1 || atoi(userRow) > 2)
+		while (checkRow < 1 || checkRow > 2)
 		{
 			cout << "Ghe hang THUONG GIA chi gom ghe tu hang 1 den hang 2 va cot tu A den F\n";
 			input(userRow, userCol);
+			checkRow = atoi(userRow);
 		}
 	}
 
 	else if (ticketType == 2)
 	{
-		while (atoi(userRow) < 3 || atoi(userRow) > 7)
+		while (checkRow < 3 || checkRow > 7)
 		{
 			cout << "Ghe hang PHO THONG chi gom ghe tu hang 3 den hang 7 va cot tu A den F\n";
 			input(userRow, userCol);
+			checkRow = atoi(userRow);
 		}
 	}
 
 	else
 	{
-		while (atoi(userRow) < 8)
+		while (checkRow < 8)
 		{
 			cout << "Ghe hang TIET KIEM chi gom ghe tu hang 8 den hang 13 va cot tu A den F\n";
 			input(userRow, userCol);
+			checkRow = atoi(userRow);
 		}
 	}
 
 	// Gan hang = hang nguoi dung nhap - 1
-	// Neu nguoi dung nhap chu in hoa: cot = cot nguoi dung - 65; khong thi cot = cotNguoiDung - 97 de cot co index cua mang
-	int row = atoi(userRow) - 1;
+	// Neu nguoi dung nhap chu in hoa: cot = cotNguoiDung - 65; khong thi cot = cotNguoiDung - 97 de cot co index cua mang
+	int row = checkRow - 1;
 	int col = ((userCol >= 'A' && userCol <= 'F') ? (int)userCol - 65 : (int)userCol - 97);
 
 	// KT neu vi tri do co nguoi da dat thi in ra loi
@@ -170,7 +174,7 @@ void bookTicket(int seat[13][6], char *userRow, char userCol, int ticketType)
 
 		// Cho phep nguoi dung nhap lai, gan lai bien hang, cot
 		input(userRow, userCol);
-		row = atoi(userRow) - 1;
+		row = checkRow - 1;
 		col = ((userCol >= 'A' && userCol <= 'F') ? (int)userCol - 65 : (int)userCol - 97);
 	}
 	// Neu vi tri ghe kha dung -> gan vi tri ghe = 1, in ra dat ve thanh cong
