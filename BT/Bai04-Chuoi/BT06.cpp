@@ -28,6 +28,9 @@ int main()
 	} while (res == INT_MIN);
 	cout << "Ngay " << dates[0] << " thang " << dates[1] << " nam "
 		 << dates[2] << " la ngay thu " << res << " trong nam\n";
+
+	delete[] dates;
+	dates = NULL;
 	return 0;
 }
 
