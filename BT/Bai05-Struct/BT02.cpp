@@ -15,7 +15,15 @@ void inputFraction(PhanSo &p);
 
 void printFraction(const PhanSo p);
 
-PhanSo sumOfFraction(const PhanSo p1, const PhanSo p2);
+void checkNegative(PhanSo &p);
+
+PhanSo addFractions(const PhanSo p1, const PhanSo p2);
+
+PhanSo subFractions(const PhanSo p1, const PhanSo p2);
+
+PhanSo mulFractions(const PhanSo p1, const PhanSo p2);
+
+PhanSo divFractions(const PhanSo p1, const PhanSo p2);
 
 int main()
 {
@@ -34,10 +42,31 @@ int main()
 	case 1:
 	{
 		cout << "Tong cua hai phan so la: ";
-		PhanSo p3 = sumOfFraction(p1, p2);
-		printFraction(simplify(p3));
+		printFraction(addFractions(p1, p2));
 		break;
 	}
+
+	case 2:
+	{
+		cout << "Hieu cua hai phan so la: ";
+		printFraction(subFractions(p1, p2));
+		break;
+	}
+
+	case 3:
+	{
+		cout << "Tich cua hai phan so la: ";
+		printFraction(mulFractions(p1, p2));
+		break;
+	}
+
+	case 4:
+	{
+		cout << "Thuong cua hai phan so la: ";
+		printFraction(divFractions(p1, p2));
+		break;
+	}
+
 	default:
 		cout << "Lua chon khong hop le\n";
 	}
@@ -46,14 +75,10 @@ int main()
 
 int UCLN(int a, int b)
 {
-	while (a != b)
-	{
-		if (a > b)
-			a -= b;
-		else
-			b -= a;
-	}
-	return a;
+	if (b == 0)
+		return a;
+	int d = a % b;
+	return UCLN(b, d);
 }
 
 void inputFraction(PhanSo &p)
@@ -71,7 +96,10 @@ void inputFraction(PhanSo &p)
 
 void printFraction(const PhanSo p)
 {
-	cout << p.tuSo << "/" << p.mauSo << endl;
+	if (p.mauSo == 1)
+		cout << p.tuSo << endl;
+	else
+		cout << p.tuSo << "/" << p.mauSo << endl;
 }
 
 PhanSo simplify(PhanSo &p)
@@ -82,7 +110,17 @@ PhanSo simplify(PhanSo &p)
 	return p;
 }
 
-PhanSo sumOfFraction(const PhanSo p1, const PhanSo p2)
+void checkNegative(PhanSo &p)
+{
+	// Neu ra mau am thi * -1 de ra dang (so am) / (so duong)
+	if (p.mauSo < 0)
+	{
+		p.tuSo *= -1;
+		p.mauSo *= -1;
+	}
+}
+
+PhanSo addFractions(const PhanSo p1, const PhanSo p2)
 {
 	PhanSo result;
 	if (p1.mauSo == p2.mauSo)
@@ -93,7 +131,43 @@ PhanSo sumOfFraction(const PhanSo p1, const PhanSo p2)
 	}
 
 	int UC = UCLN(p1.mauSo, p2.mauSo);
-	result.tuSo = p1.tuSo * UC + p2.tuSo * UC;
-	result.mauSo = p1.mauSo * UC;
+	result.tuSo = p1.tuSo * p2.mauSo + p2.tuSo * p1.mauSo;
+	result.mauSo = p1.mauSo * p2.mauSo;
+	checkNegative(result);
+	return simplify(result);
+}
+
+PhanSo subFractions(const PhanSo p1, const PhanSo p2)
+{
+	PhanSo result;
+	if (p1.mauSo == p2.mauSo)
+	{
+		result.tuSo = p1.tuSo - p2.tuSo;
+		result.mauSo = p1.mauSo;
+		return simplify(result);
+	}
+
+	int UC = UCLN(p1.mauSo, p2.mauSo);
+	result.tuSo = p1.tuSo * p2.mauSo - p2.tuSo * p1.mauSo;
+	result.mauSo = p1.mauSo * p2.mauSo;
+	checkNegative(result);
+	return simplify(result);
+}
+
+PhanSo mulFractions(const PhanSo p1, const PhanSo p2)
+{
+	PhanSo result;
+	result.tuSo = p1.tuSo * p2.tuSo;
+	result.mauSo = p1.mauSo * p2.mauSo;
+	checkNegative(result);
+	return simplify(result);
+}
+
+PhanSo divFractions(const PhanSo p1, const PhanSo p2)
+{
+	PhanSo result;
+	result.tuSo = p1.tuSo * p2.mauSo;
+	result.mauSo = p1.mauSo * p2.tuSo;
+	checkNegative(result);
 	return simplify(result);
 }
