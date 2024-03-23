@@ -26,9 +26,8 @@ int main()
 		if (res == INT_MIN)
 			cout << "Gia tri ngay thang nam khong hop le\n";
 	} while (res == INT_MIN);
-	cout << "Ngay " << dates[0] << " thang " << dates[1] << " nam "
-		 << dates[2] << " la ngay thu " << res << " trong nam\n";
 
+	cout << "Ngay " << dates[0] << " thang " << dates[1] << " nam " << dates[2] << " la ngay thu " << res << " trong nam\n";
 	delete[] dates;
 	dates = NULL;
 	return 0;
@@ -83,6 +82,7 @@ int daysInMonth(int month, int year)
 
 int countDays(int date, int month, int year)
 {
+	// Neu nhan vao ngay-thang khong hop le (vd: ngay < 1 || ngay > 31) thi return INT_MIN
 	if ((date > 31 || date < 1) || (month > 12 || month < 1) || (month == 2 && date > 29))
 		return INT_MIN;
 
