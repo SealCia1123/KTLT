@@ -1,3 +1,4 @@
+#include <cstring>
 #include <iostream>
 using namespace std;
 
@@ -14,10 +15,11 @@ struct Sach
 
 void getInfo(Sach &sach);
 
-void printInfo(const Sach sach);
+void printInfo(const Sach sach, char *name);
 
 int main()
 {
+
 	return 0;
 }
 
@@ -27,13 +29,18 @@ void getInfo(Sach &sach)
 	cin.getline(sach.tenSach, 20);
 	cout << "Nhap ten tac gia: ";
 	cin.getline(sach.tenTacGia, 20);
-	cout << "Nhap ngay-thang-nam xuat ban: ";
+	cout << "Nhap ngay thang nam xuat ban: ";
 	cin >> sach.ngayXuatBan.ngay >> sach.ngayXuatBan.thang >> sach.ngayXuatBan.nam;
 }
 
-void printInfo(const Sach sach)
+void printInfo(const Sach sach, char *name)
 {
-	cout << "Ten: " << sach.tenSach << endl;
-	cout << "Ten tac gia: " << sach.tenTacGia << endl;
-	cout << "Ngay thang nam xuat ban: " << sach.ngayXuatBan.ngay << "/" << sach.ngayXuatBan.thang << "/" << sach.ngayXuatBan.nam << endl;
+	if (strcmp(sach.tenTacGia, name) == 0)
+	{
+		cout << "Ten: " << sach.tenSach << endl;
+		cout << "Ten tac gia: " << sach.tenTacGia << endl;
+		cout << "Ngay thang nam xuat ban: " << sach.ngayXuatBan.ngay << "/" << sach.ngayXuatBan.thang << "/" << sach.ngayXuatBan.nam << endl;
+	}
+	else
+		cout << "Khong tim thay sach cua tac gia " << name << endl;
 }
