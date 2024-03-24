@@ -19,6 +19,7 @@ void printInfo(const Sach sach, char *name);
 
 int main()
 {
+	Sach listBooks[50];
 
 	return 0;
 }
