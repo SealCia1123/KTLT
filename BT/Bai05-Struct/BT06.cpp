@@ -1,5 +1,8 @@
+#include <cstring>
+#include <iomanip>
 #include <iostream>
 #include <string>
+#define MAX_PRODUCTS 30
 using namespace std;
 
 struct SanPham
@@ -10,55 +13,155 @@ struct SanPham
 	int slTonKho;
 };
 
-void input(SanPham *sp, int size);
+void input(SanPham &sp);
 
 void print(const SanPham *sp, int size);
 
+void changeProduct(SanPham &sp);
+
 int main()
 {
-	int size;
-	cout << "Nhap so luong san pham: ";
-	cin >> size;
-	cin.ignore();
-	SanPham *listProducts = new SanPham[size];
-	input(listProducts, size);
-	print(listProducts, size);
-
-	delete[] listProducts;
-	listProducts = NULL;
-	return 0;
+	SanPham *listProducts = new SanPham[MAX_PRODUCTS];
+	int choice, size = 0, index = 0;
+	while (true)
+	{
+		system("clear");
+		cout << "1. Nhap thong tin san pham\n";
+		cout << "2. Xuat thong tin san pham\n";
+		cout << "3. Sua thong tin san pham\n";
+		cout << "4. Xoa thong tin san pham\n";
+		cout << "5. Sap xep lai san pham theo so luong ton kho\n";
+		cout << "0. Thoat chuong trinh\n";
+		cout << "Nhap lua chon: ";
+		cin >> choice;
+		cin.ignore();
+		switch (choice)
+		{
+		case 1:
+		{
+			if (size > MAX_PRODUCTS)
+				cout << "So luong san pham vuot qua muc toi da\n";
+			else
+			{
+				input(listProducts[size++]);
+				cout << "Them san pham thanh cong\n";
+			}
+			break;
+		}
+		case 2:
+		{
+			cout << "=========Thong tin san pham=========\n";
+			print(listProducts, size);
+			break;
+		}
+		case 3:
+		{
+			if (size == 0)
+			{
+				cout << "Danh sach san pham hien dang trong\n";
+				break;
+			}
+			do
+			{
+				cout << "Nhap so thu tu san pham can chinh sua: ";
+				cin >> index;
+				if (index < 0 || index > size)
+					cout << "Vui long nhap lai so thu tu cua san pham\n";
+			} while (index < 0 || index > size);
+			changeProduct(listProducts[--index]);
+			break;
+		}
+		case 0:
+		{
+			cout << "Ket thuc chuong trinh\n";
+			delete[] listProducts;
+			listProducts = NULL;
+			return 0;
+		}
+		}
+		int isContinue;
+		cout << "Tiep tuc chuong trinh (1/0): ";
+		cin >> isContinue;
+		cin.ignore();
+		if (!isContinue)
+		{
+			cout << "Ket thuc chuong trinh\n";
+			delete[] listProducts;
+			listProducts = NULL;
+			return 0;
+		}
+	}
 }
 
-void input(SanPham *sp, int size)
+void input(SanPham &sp)
 {
-	for (int i = 0; i < size; i++)
-	{
-		cout << "================Nhap thong tin san pham================\n";
-		cout << "Nhap vao ma san pham: ";
-		cin.getline(sp[i].maSP, 10);
-		cout << "Nhap vao ten san pham: ";
-		getline(cin, sp[i].tenSP);
-		cout << "Nhap don gia: ";
-		cin >> sp[i].donGia;
-		cout << "Nhap so luong ton kho: ";
-		cin >> sp[i].slTonKho;
-		cin.ignore();
-	}
+	cout << "================Nhap thong tin san pham================\n";
+	cout << "Nhap vao ma san pham: ";
+	cin.getline(sp.maSP, 10);
+	cout << "Nhap vao ten san pham: ";
+	getline(cin, sp.tenSP);
+	cout << "Nhap don gia: ";
+	cin >> sp.donGia;
+	cout << "Nhap so luong ton kho: ";
+	cin >> sp.slTonKho;
+	cin.ignore();
 }
 
 void print(const SanPham *sp, int size)
 {
 	if (size == 0)
-		cout << "Khong co san pham\n";
-	else
 	{
-		for (int i = 0; i < size; i++)
-		{
-			cout << "============San pham thu " << i + 1 << "============\n";
-			cout << "Ma san pham: " << sp[i].maSP << endl;
-			cout << "Ten san pham: " << sp[i].tenSP << endl;
-			cout << "Don gia: " << sp[i].donGia << endl;
-			cout << "So luong ton kho: " << sp[i].slTonKho << endl;
-		}
+		cout << "Danh sach san pham rong\n";
+		return;
+	}
+	for (int i = 0; i < size; i++)
+	{
+		cout << "============San pham thu " << i + 1 << "============\n";
+		cout << "Ma san pham: " << sp[i].maSP << endl;
+		cout << "Ten san pham: " << sp[i].tenSP << endl;
+		cout << "Don gia: " << fixed << setprecision(0) << sp[i].donGia << endl;
+		cout << "So luong ton kho: " << sp[i].slTonKho << endl;
+	}
+}
+
+void changeProduct(SanPham &sp)
+{
+	int choice;
+	cout << "1. Sua ma san pham\n";
+	cout << "2. Sua ten san pham\n";
+	cout << "3. Sua don gia\n";
+	cout << "4. Sua so luong ton kho\n";
+	cout << "Nhap lua chon: ";
+	cin >> choice;
+	cin.ignore();
+	switch (choice)
+	{
+	case 1:
+	{
+		cout << "Nhap ma san pham moi: ";
+		char maSPMoi[10];
+		cin.getline(sp.maSP, 10);
+		break;
+	}
+	case 2:
+	{
+		cout << "Nhap ten san pham moi: ";
+		getline(cin, sp.tenSP);
+		break;
+	}
+	case 3:
+	{
+		cout << "Nhap don gia moi: ";
+		cin >> sp.donGia;
+		break;
+	}
+	case 4:
+	{
+		cout << "Nhap don gia moi: ";
+		cin >> sp.slTonKho;
+		break;
+	}
+	default:
+		cout << "Lua chon khong hop le\n";
 	}
 }
