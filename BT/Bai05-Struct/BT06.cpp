@@ -7,7 +7,7 @@ using namespace std;
 
 struct SanPham
 {
-	char maSP[10];
+	char *maSP = new char[10];
 	string tenSP;
 	double donGia;
 	int slTonKho;
@@ -19,12 +19,14 @@ void print(const SanPham *sp, int size);
 
 void changeProduct(SanPham &sp);
 
+void deleteProduct(SanPham *sp, int index, int size);
+
 int currentSize = 0;
 
 int main()
 {
 	SanPham *listProducts = new SanPham[MAX_PRODUCTS];
-	int choice, inputSize = 0, modifiedIndex = 0, inputIndex = 0;
+	int choice;
 	while (true)
 	{
 		system("clear");
@@ -61,6 +63,7 @@ int main()
 				cout << "Danh sach san pham hien dang trong\n";
 				break;
 			}
+			int modifiedIndex = 0;
 			do
 			{
 				cout << "Nhap so thu tu san pham can chinh sua: ";
@@ -71,9 +74,29 @@ int main()
 			changeProduct(listProducts[--modifiedIndex]);
 			break;
 		}
+		case 4:
+		{
+			cout << "=========Xoa san pham=========\n";
+			if (currentSize == 0)
+			{
+				cout << "Danh sach san pham hien dang trong\n";
+				break;
+			}
+			int deleteIndex = 0;
+			do
+			{
+				cout << "Nhap so thu tu san pham can xoa: ";
+				cin >> deleteIndex;
+				if (deleteIndex < 0 || deleteIndex > currentSize)
+					cout << "Vui long nhap lai so thu tu cua san pham\n";
+			} while (deleteIndex < 0 || deleteIndex > currentSize);
+			deleteProduct(listProducts, --deleteIndex, currentSize);
+			break;
+		}
 		case 0:
 		{
 			cout << "Ket thuc chuong trinh\n";
+			delete[] listProducts->maSP;
 			delete[] listProducts;
 			listProducts = NULL;
 			return 0;
@@ -86,6 +109,7 @@ int main()
 		if (!isContinue)
 		{
 			cout << "Ket thuc chuong trinh\n";
+			delete[] listProducts->maSP;
 			delete[] listProducts;
 			listProducts = NULL;
 			return 0;
@@ -116,8 +140,7 @@ void print(const SanPham *sp, int size)
 	}
 	for (int i = 0; i < size; i++)
 	{
-		cout << "=========================================\n";
-		cout << "San pham thu " << i + 1 << "\n";
+		cout << "=========San pham thu " << i + 1 << "=========\n";
 		cout << "Ma san pham: " << sp[i].maSP << endl;
 		cout << "Ten san pham: " << sp[i].tenSP << endl;
 		cout << "Don gia: " << fixed << setprecision(0) << sp[i].donGia << endl;
@@ -167,4 +190,21 @@ void changeProduct(SanPham &sp)
 		cout << "Lua chon khong hop le\n";
 	}
 	cout << "=========================================\n";
+}
+
+void deleteProduct(SanPham *sp, int index, int size)
+{
+	if (index < size - 1)
+	{
+		for (int i = size - 1; i > index; i--)
+		{
+			sp[i - 1].maSP = sp[i].maSP;
+			sp[i - 1].tenSP = sp[i].tenSP;
+			sp[i - 1].donGia = sp[i].donGia;
+			sp[i - 1].slTonKho = sp[i].slTonKho;
+		}
+	}
+	--currentSize;
+	cout << "=========Xoa san pham thanh cong=========\n";
+	print(sp, currentSize);
 }
