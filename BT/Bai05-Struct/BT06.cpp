@@ -13,7 +13,7 @@ struct SanPham
 	int slTonKho;
 };
 
-void input(SanPham *sp, int start, int end);
+void input(SanPham &sp);
 
 void print(const SanPham *sp, int size);
 
@@ -44,15 +44,7 @@ int main()
 			if (currentSize > MAX_PRODUCTS)
 				cout << "So luong san pham vuot qua muc toi da\n";
 			else
-			{
-				cout << "Nhap so luong san pham can them: ";
-				cin >> inputSize;
-				cin.ignore();
-			}
-			if (currentSize != 0)
-				inputIndex = currentSize - 1;
-			currentSize += inputIndex;
-			input(listProducts, inputIndex, currentSize);
+				input(listProducts[currentSize++]);
 			break;
 		}
 		case 2:
@@ -101,22 +93,18 @@ int main()
 	}
 }
 
-void input(SanPham *sp, int start, int size)
+void input(SanPham &sp)
 {
-	for (int i = start; i < size; i++)
-	{
-		cout << "\n=========Nhap thong tin san pham thu " << currentSize << "=========\n";
-		cout << "Nhap vao ma san pham: ";
-		cin.getline(sp[i].maSP, 10);
-		cout << "Nhap vao ten san pham: ";
-		getline(cin, sp[i].tenSP);
-		cout << "Nhap don gia: ";
-		cin >> sp[i].donGia;
-		cout << "Nhap so luong ton kho: ";
-		cin >> sp[i].slTonKho;
-		cin.ignore();
-	}
-	cout << "=========================================\n";
+	cout << "=========Nhap thong tin san pham thu " << currentSize << "=========\n";
+	cout << "Nhap vao ma san pham: ";
+	cin.getline(sp.maSP, 10);
+	cout << "Nhap vao ten san pham: ";
+	getline(cin, sp.tenSP);
+	cout << "Nhap don gia: ";
+	cin >> sp.donGia;
+	cout << "Nhap so luong ton kho: ";
+	cin >> sp.slTonKho;
+	cin.ignore();
 }
 
 void print(const SanPham *sp, int size)
