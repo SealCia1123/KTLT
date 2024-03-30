@@ -114,9 +114,9 @@ int main()
 		}
 		case 0:
 		{
-			cout << "Ket thuc chuong trinh\n";
 			delete[] listProducts;
 			listProducts = NULL;
+			cout << "Ket thuc chuong trinh\n";
 			return 0;
 		}
 		}
@@ -126,9 +126,9 @@ int main()
 		cin.ignore();
 		if (!isContinue)
 		{
-			cout << "Ket thuc chuong trinh\n";
 			delete[] listProducts;
 			listProducts = NULL;
+			cout << "Ket thuc chuong trinh\n";
 			return 0;
 		}
 	}
@@ -228,12 +228,10 @@ void deleteProduct(SanPham *sp, int index, int size)
 
 void mySwap(char *a, char *b)
 {
-	char *temp = new char[strlen(a)];
+	char temp[10];
 	strcpy(temp, a);
 	strcpy(a, b);
 	strcpy(b, temp);
-	delete[] temp;
-	temp = NULL;
 }
 
 void mySwap(string &a, string &b)
