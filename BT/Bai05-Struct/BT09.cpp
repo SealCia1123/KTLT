@@ -8,7 +8,6 @@ class PhanSo
 };
 
 int main()
-
 {
 	return 0;
 }
