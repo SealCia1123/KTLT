@@ -17,7 +17,7 @@ void printFraction(const PhanSo p);
 
 void checkNegative(PhanSo &p);
 
-PhanSo addFractions(const PhanSo p1, const PhanSo p2);
+PhanSo sumFractions(const PhanSo p1, const PhanSo p2);
 
 PhanSo subFractions(const PhanSo p1, const PhanSo p2);
 
@@ -42,31 +42,27 @@ int main()
 	case 1:
 	{
 		cout << "Tong cua hai phan so la: ";
-		printFraction(addFractions(p1, p2));
+		printFraction(sumFractions(p1, p2));
 		break;
 	}
-
 	case 2:
 	{
 		cout << "Hieu cua hai phan so la: ";
 		printFraction(subFractions(p1, p2));
 		break;
 	}
-
 	case 3:
 	{
 		cout << "Tich cua hai phan so la: ";
 		printFraction(mulFractions(p1, p2));
 		break;
 	}
-
 	case 4:
 	{
 		cout << "Thuong cua hai phan so la: ";
 		printFraction(divFractions(p1, p2));
 		break;
 	}
-
 	default:
 		cout << "Lua chon khong hop le\n";
 	}
@@ -120,7 +116,7 @@ void checkNegative(PhanSo &p)
 	}
 }
 
-PhanSo addFractions(const PhanSo p1, const PhanSo p2)
+PhanSo sumFractions(const PhanSo p1, const PhanSo p2)
 {
 	PhanSo result;
 	if (p1.mauSo == p2.mauSo)
