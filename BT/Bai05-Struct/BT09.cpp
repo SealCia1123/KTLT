@@ -9,22 +9,10 @@ class PhanSo
 	int tuSo, mauSo;
 
   public:
-	int getTS();
-	int getMS();
 	void setFraction();
-	void printFraction();
-	void simplify();
+	void getFraction();
+	void simplify(int &ts, int &ms);
 };
-
-int PhanSo::getTS()
-{
-	return tuSo;
-}
-
-int PhanSo::getMS()
-{
-	return mauSo;
-}
 
 void PhanSo::setFraction()
 {
@@ -36,26 +24,31 @@ void PhanSo::setFraction()
 		if (b == 0)
 			cout << "Nhap mau khac 0\n";
 	} while (b == 0);
+	tuSo = a;
+	mauSo = b;
 }
 
-void PhanSo::printFraction()
+void PhanSo::getFraction()
 {
+	simplify(tuSo, mauSo);
 	if (mauSo == 1)
 		cout << tuSo << endl;
 	else
 		cout << tuSo << "/" << mauSo << endl;
 }
 
-void PhanSo::simplify()
+void PhanSo::simplify(int &ts, int &ms)
 {
 	int UC = UCLN(tuSo, mauSo);
-	tuSo = tuSo / UC;
-	mauSo = mauSo / UC;
+	ts = ts / UC;
+	ms = ms / UC;
 }
 
 int main()
 {
 	PhanSo p;
+	p.setFraction();
+	p.getFraction();
 	/* PhanSo p1, p2; */
 	/* int choice; */
 	/* cout << "1. Tinh TONG hai phan so\n"; */
