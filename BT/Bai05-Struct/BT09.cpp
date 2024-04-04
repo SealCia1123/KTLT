@@ -12,6 +12,7 @@ class PhanSo
 	void setFraction();
 	void getFraction();
 	void simplify(int &ts, int &ms);
+	PhanSo sumFractions(const PhanSo p1, const PhanSo p2);
 };
 
 void PhanSo::setFraction()
@@ -44,46 +45,31 @@ void PhanSo::simplify(int &ts, int &ms)
 	ms = ms / UC;
 }
 
+PhanSo PhanSo::sumFractions(const PhanSo p1, const PhanSo p2)
+{
+	PhanSo res;
+	if (p1.mauSo == p2.mauSo)
+	{
+		res.tuSo = p1.tuSo + p2.tuSo;
+		res.mauSo = p1.mauSo;
+	}
+	else
+	{
+		res.tuSo = p1.tuSo * p2.mauSo + p2.tuSo * p1.mauSo;
+		res.mauSo = p1.mauSo * p2.mauSo;
+	}
+	return res;
+}
+
 int main()
 {
-	PhanSo p;
+	PhanSo p, q, res;
 	p.setFraction();
 	p.getFraction();
-	/* PhanSo p1, p2; */
-	/* int choice; */
-	/* cout << "1. Tinh TONG hai phan so\n"; */
-	/* cout << "2. Tinh HIEU hai phan so\n"; */
-	/* cout << "3. Tinh TICH hai phan so\n"; */
-	/* cout << "4. Tinh THUONG hai phan so\n"; */
-	/* cout << "Nhap lua chon: "; */
-	/* cin >> choice; */
-	/* cout << "Nhap vao phan so thu nhat\n"; */
-	/* cout << "Nhap vao phan so thu hai\n"; */
-	/* switch (choice) */
-	/* { */
-	/* case 1: */
-	/* { */
-	/* 	cout << "Tong cua hai phan so la: "; */
-	/* 	break; */
-	/* } */
-	/* case 2: */
-	/* { */
-	/* 	cout << "Hieu cua hai phan so la: "; */
-	/* 	break; */
-	/* } */
-	/* case 3: */
-	/* { */
-	/* 	cout << "Tich cua hai phan so la: "; */
-	/* 	break; */
-	/* } */
-	/* case 4: */
-	/* { */
-	/* 	cout << "Thuong cua hai phan so la: "; */
-	/* 	break; */
-	/* } */
-	/* default: */
-	/* 	cout << "Lua chon khong hop le\n"; */
-	/* } */
+	q.setFraction();
+	q.getFraction();
+	res = res.sumFractions(p, q);
+	res.getFraction();
 	return 0;
 }
 
