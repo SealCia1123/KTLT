@@ -17,16 +17,17 @@ class PhanSo
 	void simplify(PhanSo &p);
 	PhanSo sumFractions(const PhanSo p1, const PhanSo p2);
 	PhanSo subFractions(const PhanSo p1, const PhanSo p2);
+	PhanSo mulFractions(const PhanSo p1, const PhanSo p2);
 };
 
 int PhanSo::getTS()
 {
-	return this->tuSo;
+	return tuSo;
 }
 
 int PhanSo::getMS()
 {
-	return this->mauSo;
+	return mauSo;
 }
 
 void PhanSo::setFraction()
@@ -94,6 +95,15 @@ PhanSo PhanSo::subFractions(const PhanSo p1, const PhanSo p2)
 	return result;
 }
 
+PhanSo PhanSo::mulFractions(const PhanSo p1, const PhanSo p2)
+{
+	PhanSo result;
+	result.tuSo = p1.tuSo * p2.tuSo;
+	result.mauSo = p1.mauSo * p2.mauSo;
+	simplify(result);
+	return result;
+}
+
 int main()
 {
 	PhanSo p1, p2, res;
@@ -121,6 +131,20 @@ int main()
 	{
 		res = res.subFractions(p1, p2);
 		cout << "Hieu hai phan so la: ";
+		res.getFraction();
+		break;
+	}
+	case 3:
+	{
+		res = res.mulFractions(p1, p2);
+		cout << "Tich hai phan so la: ";
+		res.getFraction();
+		break;
+	}
+	case 4:
+	{
+		res = res.subFractions(p1, p2);
+		cout << "Thuong hai phan so la: ";
 		res.getFraction();
 		break;
 	}
