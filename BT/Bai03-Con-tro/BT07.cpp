@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int *find(int *arr, int n, int value);
+int *find(int arr[], int n, int value);
 
 int main()
 {
@@ -20,13 +20,16 @@ int main()
 	return 0;
 }
 
-int *find(int *arr, int n, int value)
+int *find(int arr[], int n, int value)
 {
-	int *p = NULL;
+	int *p = arr;
 	for (int i = 0; i < n; i++)
 	{
 		if (arr[i] == value)
-			return (p = arr + i);
+		{
+			p = arr + i;
+			return p;
+		}
 	}
-	return p;
+	return NULL;
 }
