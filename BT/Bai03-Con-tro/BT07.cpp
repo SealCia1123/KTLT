@@ -22,14 +22,10 @@ int main()
 
 int *find(int arr[], int n, int value)
 {
-	int *p = arr;
 	for (int i = 0; i < n; i++)
 	{
 		if (arr[i] == value)
-		{
-			p = arr + i;
-			return p;
-		}
+			return (arr + i);
 	}
 	return NULL;
 }

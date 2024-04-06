@@ -15,7 +15,7 @@ int main()
 	{
 		for (int j = 0; j <= i; j++)
 		{
-			if (i == 0 || j == 0 || j == i)
+			if (i == 0 || j == 0)
 				mt[i][j] = 1;
 			else
 				mt[i][j] = mt[i - 1][j - 1] + mt[i - 1][j];
