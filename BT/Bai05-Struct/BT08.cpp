@@ -19,6 +19,7 @@ int sumOfPalindrome(const MaTran mt);
 
 int main()
 {
+	srand(time(0));
 	MaTran mt;
 	generateRandomNumber(mt);
 	printMatrix(mt);
@@ -55,7 +56,7 @@ void printMatrix(const MaTran mt)
 	for (int i = 0; i < mt.soDong; i++)
 	{
 		for (int j = 0; j < mt.soCot; j++)
-			cout << mt.ptr[i][j] << " ";
+			cout << mt.ptr[i][j] << "\t";
 		cout << endl;
 	}
 }

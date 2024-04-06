@@ -2,31 +2,21 @@
 #include <iostream>
 using namespace std;
 
-inline int UCLN(int a, int b)
-{
-
-	a = abs(a);
-	b = abs(b);
-	if (b == 0)
-		return a;
-	int d = a % b;
-	return UCLN(b, d);
-}
-
 class PhanSo
 {
    private:
 	int tuSo, mauSo;
 
    public:
-	int getTS()
+	int UCLN(int a, int b)
 	{
-		return tuSo;
-	}
 
-	int getMS()
-	{
-		return mauSo;
+		a = abs(a);
+		b = abs(b);
+		if (b == 0)
+			return a;
+		int d = a % b;
+		return UCLN(b, d);
 	}
 
 	void setFraction()
