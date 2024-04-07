@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <iostream>
 
 using namespace std;
@@ -15,6 +16,8 @@ int main()
 
 int UCLN(int a, int b)
 {
+	a = abs(a);
+	b = abs(b);
 	if (b == 0)
 		return a;
 	int d = a % b;

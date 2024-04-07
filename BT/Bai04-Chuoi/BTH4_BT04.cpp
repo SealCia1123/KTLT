@@ -19,7 +19,6 @@ int main()
 		cout << "Chuoi " << s << " khong phai la chuoi Palindrome\n";
 
 	delete[] s;
-	s = NULL;
 	return 0;
 }
 
