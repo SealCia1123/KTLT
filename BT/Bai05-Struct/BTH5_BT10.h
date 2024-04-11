@@ -4,19 +4,19 @@ using namespace std;
 
 class GPG
 {
-   private:
+  private:
 	int gio, phut, giay;
 
-   public:
+  public:
 	void setTime()
 	{
 		do
 		{
 			cout << "Nhap vao gio phut giay: ";
 			cin >> gio >> phut >> giay;
-			if ((gio < 1 || gio > 24) || (phut < 1 || phut > 60) || (giay < 1 || giay > 60))
+			if ((gio < 0 || gio > 24) || (phut < 0 || phut > 60) || (giay < 0 || giay > 60))
 				cout << "Thoi gian nhap vao khong hop le\n";
-		} while ((gio < 1 || gio > 24) || (phut < 1 || phut > 60) || (giay < 1 || giay > 60));
+		} while ((gio < 0 || gio > 24) || (phut < 0 || phut > 60) || (giay < 0 || giay > 60));
 	}
 
 	void printGPG()
