@@ -27,6 +27,5 @@ int main()
 	}
 	cout << "Dia chi cua phan tu lon nhat trong mang: " << maxIndex << endl;
 	delete[] p;
-	p = NULL;
 	return 0;
 }

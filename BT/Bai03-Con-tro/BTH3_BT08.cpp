@@ -32,6 +32,5 @@ int main()
 	for (int i = 0; i < h; i++)
 		delete[] mt[i];
 	delete[] mt;
-	mt = NULL;
 	return 0;
 }

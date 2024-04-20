@@ -19,7 +19,6 @@ int main()
 	cout << endl;
 
 	delete[] newArr;
-	newArr = NULL;
 	return 0;
 }
 
