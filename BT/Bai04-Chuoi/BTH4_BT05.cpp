@@ -1,28 +1,24 @@
+#include <conio.h>
 #include <iostream>
-#include <ncurses.h>
 using namespace std;
-
 int main()
 {
-	int i = 0;
 	char password[11];
-	char a;
-	cout << "Nhap mat khau: ";
+	char temp;
+	int i = 0;
 	while (true)
 	{
-		a = getch();
-		if (a == '\n')
+		temp = getch();
+		if (temp == ' ')
+			continue;
+		if (temp == '\r')
 		{
 			password[i] = '\0';
 			break;
 		}
-		if (a == ' ')
-			continue;
-		cout << "*";
-		password[i++] = a;
+		cout << "X ";
+		password[i++] = temp;
 	}
 	cout << endl
-		 << password << endl;
-
-	return 0;
+		 << password;
 }
