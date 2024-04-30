@@ -1,4 +1,4 @@
-/* #include <conio.h> */
+#include <conio.h>
 #include <cstring>
 #include <iostream>
 using namespace std;
