@@ -19,7 +19,7 @@ struct DanhSachSV
 	SinhVien *sv;
 };
 
-void readFile(DanhSachSV ds);
+void readFile(DanhSachSV &ds);
 
 void print(const DanhSachSV ds);
 
@@ -29,51 +29,16 @@ void swapSV(SinhVien &sv1, SinhVien &sv2);
 
 int main()
 {
-	/* DanhSachSV ds; */
-	/* readFile(ds); */
-	/* print(ds); */
-	/* DanhSachSV dsTenGiamDan = sapXepTenGiamDan(ds); */
-	/* cout << "Thu tu ten giam dan\n"; */
-	/* print(dsTenGiamDan); */
-	/* delete[] ds.sv; */
-	/* delete[] dsTenGiamDan.sv; */
-	SinhVien sv1, sv2;
-	cout << "Nhap que quan sv1: ";
-	sv1.MSSV = 1;
-	sv1.hoTen = "Nguyen Van A";
-	cin.getline(sv1.queQuan, 30);
-	sv1.diemMonHoc[0] = 9;
-	sv1.diemMonHoc[1] = 9;
-	sv1.diemMonHoc[2] = 9;
-
-	cout << "Nhap que quan sv1: ";
-	sv2.MSSV = 1;
-	sv2.hoTen = "Nguyen Van A";
-	cin.getline(sv2.queQuan, 30);
-	sv2.diemMonHoc[0] = 6;
-	sv2.diemMonHoc[1] = 6;
-	sv2.diemMonHoc[2] = 6;
-	swapSV(sv1, sv2);
-	cout << "===SV1===\n";
-	cout << "MSSV: " << sv1.MSSV << "\n";
-	cout << "Ho ten: " << sv1.hoTen << "\n";
-	cout << "Que quan: " << sv1.queQuan << "\n";
-	cout << "Diem:\t";
-	for (int i = 0; i < SO_MON; i++)
-		cout << sv1.diemMonHoc[i] << "\t";
-	cout << endl;
-	cout << "===sv2===\n";
-	cout << "MSSV: " << sv2.MSSV << "\n";
-	cout << "Ho ten: " << sv2.hoTen << "\n";
-	cout << "Que quan: " << sv2.queQuan << "\n";
-	cout << "Diem:\t";
-	for (int i = 0; i < SO_MON; i++)
-		cout << sv2.diemMonHoc[i] << "\t";
-	cout << endl;
+	DanhSachSV ds;
+	readFile(ds);
+	print(ds);
+	cout << "================Thu tu ten giam dan===================\n";
+	DanhSachSV dsGiamDan = sapXepTenGiamDan(ds);
+	print(dsGiamDan);
 	return 0;
 }
 
-void readFile(DanhSachSV ds)
+void readFile(DanhSachSV &ds)
 {
 	ifstream f;
 	f.open("data.txt", ios::in);
@@ -100,6 +65,7 @@ void print(const DanhSachSV ds)
 	cout << "====IN THONG TIN SINH VIEN====\n";
 	for (int i = 0; i < ds.soLuong; i++)
 	{
+		cout << "====Sinh vien thu " << i + 1 << "====\n";
 		cout << "MSSV: " << ds.sv[i].MSSV << "\n";
 		cout << "Ho ten: " << ds.sv[i].hoTen << "\n";
 		cout << "Que quan: " << ds.sv[i].queQuan << "\n";
@@ -143,11 +109,11 @@ DanhSachSV sapXepTenGiamDan(const DanhSachSV ds)
 	for (int i = 0; i < ds.soLuong; i++)
 		result.sv[i] = ds.sv[i];
 
-	for (int i = 0; i < ds.soLuong - 1; i++)
+	for (int i = 0; i < result.soLuong - 1; i++)
 	{
-		for (int j = i + 1; j < ds.soLuong - i - 1; j++)
+		for (int j = i + 1; j < result.soLuong; j++)
 		{
-			if (result.sv[i].hoTen < result.sv[i].hoTen)
+			if (result.sv[i].hoTen < result.sv[j].hoTen)
 				swapSV(result.sv[i], result.sv[j]);
 		}
 	}
