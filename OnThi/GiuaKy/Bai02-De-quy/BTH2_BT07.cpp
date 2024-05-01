@@ -12,6 +12,7 @@ int main()
 	cin >> n;
 	cout << "Tong so chu so chan: " << sumEvenDigit(n) << "\n";
 	cout << "Tong so chu so le: " << sumOddDigit(n) << "\n";
+
 	return 0;
 }
 
