@@ -55,7 +55,6 @@ int main()
 	DanhSachSV timKiem = searchName(ds);
 	print(timKiem);
 
-	cout << "\n======================Danh sach dat hoc bong=========================\n";
 	DanhSachSV hocBong = dsDatHocBong(ds);
 	xuatDSHocBong(hocBong);
 
@@ -91,10 +90,9 @@ void readFile(DanhSachSV &ds)
 
 void print(const DanhSachSV ds)
 {
-	cout << "IN THONG TIN SINH VIEN\n";
 	for (int i = 0; i < ds.soLuong; i++)
 	{
-		cout << "================================\n";
+		cout << "\n================================\n";
 		cout << "MSSV: " << ds.sv[i].MSSV << "\n";
 		cout << "Ho ten: " << ds.sv[i].hoTen << "\n";
 		cout << "Que quan: " << ds.sv[i].queQuan << "\n";
@@ -107,7 +105,6 @@ void print(const DanhSachSV ds)
 
 void swapSV(SinhVien &sv1, SinhVien &sv2)
 {
-	// Tao temp
 	SinhVien temp;
 	temp.MSSV = sv1.MSSV;
 	temp.hoTen = sv1.hoTen;
@@ -115,14 +112,12 @@ void swapSV(SinhVien &sv1, SinhVien &sv2)
 	for (int i = 0; i < SO_MON; i++)
 		temp.diemMonHoc[i] = sv1.diemMonHoc[i];
 
-	// Gan a cho b
 	sv1.MSSV = sv2.MSSV;
 	sv1.hoTen = sv2.hoTen;
 	strcpy(sv1.queQuan, sv2.queQuan);
 	for (int i = 0; i < SO_MON; i++)
 		sv1.diemMonHoc[i] = sv2.diemMonHoc[i];
 
-	// Gan b cho temp
 	sv2.MSSV = temp.MSSV;
 	sv2.hoTen = temp.hoTen;
 	strcpy(sv2.queQuan, temp.queQuan);
