@@ -13,13 +13,13 @@ int main()
 	cout << "Nhap phan tu vao mang: ";
 	for (int i = 0; i < n; i++)
 		cin >> arr[i];
-	cout << "Tong cac phan tu trong mang: " << sumOfArr(arr, n - 1) << endl;
+	cout << "Tong cac phan tu trong mang: " << sumOfArr(arr, n) << endl;
 	return 0;
 }
 
 int sumOfArr(const int arr[], int n)
 {
-	if (n == 0)
+	if (n - 1 == 0)
 		return arr[0];
-	return arr[n] + sumOfArr(arr, n - 1);
+	return arr[n - 1] + sumOfArr(arr, n - 1);
 }
