@@ -1,18 +1,22 @@
+// Ve tam giac Pascal bang 2 cach
 #include <iostream>
 #define MAX_SIZE 10
 using namespace std;
 
 void printPascalTriagle(int h);
 
-/* int ctToHop(int n, int k); */
-/**/
-/* void inTamGiac(int h); */
+int ctToHop(int n, int k);
+
+void inTamGiac(int h);
 
 int main()
 {
 	int h;
 	cin >> h;
+	// Cach 1: Khong dung de quy, dung 2 vong for
 	printPascalTriagle(h);
+	// Cach 2: Dung de quy tinh tung phan tu cua mang 2 chieu
+	inTamGiac(h);
 	return 0;
 }
 
@@ -33,19 +37,19 @@ void printPascalTriagle(int h)
 	}
 }
 
-/* int ctToHop(int n, int k) */
-/* { */
-/* 	if (k == 0 || n == k) */
-/* 		return 1; */
-/* 	return ctToHop(n - 1, k - 1) + ctToHop(n - 1, k); */
-/* } */
-/**/
-/* void inTamGiac(int h) */
-/* { */
-/* 	for (int i = 0; i < h; i++) */
-/* 	{ */
-/* 		for (int j = 0; j <= i; j++) */
-/* 			cout << ctToHop(i, j) << "\t"; */
-/* 		cout << "\n"; */
-/* 	} */
-/* } */
+int ctToHop(int n, int k)
+{
+	if (k == 0 || n == k)
+		return 1;
+	return ctToHop(n - 1, k - 1) + ctToHop(n - 1, k);
+}
+
+void inTamGiac(int h)
+{
+	for (int i = 0; i < h; i++)
+	{
+		for (int j = 0; j <= i; j++)
+			cout << ctToHop(i, j) << "\t";
+		cout << "\n";
+	}
+}

@@ -1,3 +1,4 @@
+// Tim so nho nhat trong mang
 #include <iostream>
 #define MAX_SIZE 10
 using namespace std;
