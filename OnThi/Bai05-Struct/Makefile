@@ -1,3 +1,9 @@
 CXXFLAGS = -Wall --std=c++23
-test: QuanLySV.cpp
+SV: QuanLySV.cpp
 	g++ QuanLySV.cpp $(CXXFLAGS) -o .output/QuanLySV; .output/QuanLySV
+
+MT: MaTran.cpp
+	g++ MaTran.cpp $(CXXFLAGS) -o .output/MaTran; .output/MaTran
+
+clean:
+	rm .output/*

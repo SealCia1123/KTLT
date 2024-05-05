@@ -70,6 +70,11 @@ void readFile(DanhSachSV &ds)
 {
 	ifstream f;
 	f.open("data.txt", ios::in);
+	if (!f.is_open())
+	{
+		cout << "Failed to open file\n";
+		return;
+	}
 	f >> ds.soLuong;
 	ds.sv = new SinhVien[ds.soLuong];
 	f.ignore();
@@ -211,6 +216,11 @@ void xuatDSHocBong(const DanhSachSV ds)
 {
 	ofstream f;
 	f.open("hocbong.txt", ios::out);
+	if (!f.is_open())
+	{
+		cout << "Failed to write file\n";
+		return;
+	}
 	f << "Danh sach dat hoc bong" << endl;
 	for (int i = 0; i < ds.soLuong; i++)
 	{
