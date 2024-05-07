@@ -9,8 +9,6 @@ d) Tim phan so lon nhat cua ma tran
 e) Tim va in ra phan so lon nhat tren tung dong
 
 */
-
-#include <iomanip>
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
@@ -75,17 +73,6 @@ struct PhanSo
 		else
 			cout << tuSo << "/" << mauSo;
 	}
-
-	int soSanh(PhanSo p)
-	{
-		float temp1 = (float)this->tuSo / this->mauSo;
-		float temp2 = (float)p.tuSo / p.mauSo;
-		if (temp1 == temp2)
-			return 0;
-		else if (temp1 > temp2)
-			return 1;
-		return -1;
-	}
 };
 
 struct MaTranPS
@@ -135,6 +122,17 @@ struct MaTranPS
 	}
 };
 
+int soSanh(const PhanSo p1, const PhanSo p2)
+{
+	double temp1 = (double)p1.tuSo / p1.mauSo;
+	double temp2 = (double)p2.tuSo / p2.mauSo;
+	if (temp1 == temp2)
+		return 0;
+	else if (temp1 > temp2)
+		return 1;
+	return -1;
+}
+
 double tongMaTran(const MaTranPS mt)
 {
 	double sum = 0;
@@ -148,36 +146,65 @@ double tongMaTran(const MaTranPS mt)
 
 PhanSo timPSLonNhat(const MaTranPS mt)
 {
-	PhanSo p;
-	p.tuSo = mt.arr[0][0].tuSo;
-	p.mauSo = mt.arr[0][0].mauSo;
+	PhanSo psLonNhat;
+	psLonNhat.tuSo = mt.arr[0][0].tuSo;
+	psLonNhat.mauSo = mt.arr[0][0].mauSo;
 	for (int i = 0; i < mt.row; i++)
 	{
 		for (int j = 0; j < mt.col; j++)
 		{
-			if ((double)mt.arr[i][j].tuSo / mt.arr[i][j].mauSo < (double)p.tuSo / p.mauSo)
+			if (soSanh(psLonNhat, mt.arr[i][j]) == -1)
 			{
-				p.tuSo = mt.arr[i][j].tuSo;
-				p.mauSo = mt.arr[i][j].mauSo;
+				psLonNhat.tuSo = mt.arr[i][j].tuSo;
+				psLonNhat.mauSo = mt.arr[i][j].mauSo;
 			}
 		}
+	}
+	return psLonNhat;
+}
+
+PhanSo *lonNhatTungDong(const MaTranPS mt)
+{
+	int index = 0;
+	PhanSo *p = new PhanSo[mt.row];
+	for (int i = 0; i < mt.row; i++)
+	{
+		PhanSo temp = mt.arr[i][0];
+		for (int j = 0; j < mt.col; j++)
+		{
+			if (soSanh(temp, mt.arr[i][j]) == -1)
+			{
+				temp.tuSo = mt.arr[i][j].tuSo;
+				temp.mauSo = mt.arr[i][j].mauSo;
+			}
+		}
+		p[index++] = temp;
 	}
 	return p;
 }
 
 int main()
 {
-	MaTranPS p;
-	p.nhapMT();
-	p.inMT();
-	double t = tongMaTran(p);
-	cout << "Tong cac phan tu trong ma tran: " << fixed << setprecision(2) << t << "\n";
+	MaTranPS mtPS;
+	mtPS.nhapMT();
+	mtPS.inMT();
+	cout << "\nTong cac phan tu trong ma tran: " << tongMaTran(mtPS) << "\n";
 
-	PhanSo psLonNhat = timPSLonNhat(p);
+	PhanSo psLonNhat = timPSLonNhat(mtPS);
 	cout << "Phan so lon nhat trong mang: ";
 	psLonNhat.inPS();
 	cout << "\n";
 
-	p.freeMT();
+	PhanSo *dayPSLonNhat = lonNhatTungDong(mtPS);
+	cout << "\nCac phan so lon nhat trong tung dong:\n";
+	for (int i = 0; i < mtPS.row; i++)
+	{
+		cout << "Dong " << i + 1 << ": ";
+		dayPSLonNhat[i].inPS();
+		cout << "\n";
+	}
+
+	delete[] dayPSLonNhat;
+	mtPS.freeMT();
 	return 0;
 }
