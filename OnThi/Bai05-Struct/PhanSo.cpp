@@ -11,6 +11,7 @@ e) Tim va in ra phan so lon nhat tren tung dong
 */
 #include <iostream>
 #include <stdlib.h>
+#include <string.h>
 using namespace std;
 
 int UCLN(int a, int b)
@@ -53,7 +54,9 @@ struct PhanSo
 		do
 		{
 			cout << "Nhap vao tu so va mau so: ";
-			cin >> tuSo >> mauSo;
+			cin >> tuSo;
+			cin.ignore();
+			cin >> mauSo;
 			if (mauSo == 0)
 				cout << "Loi chia cho 0\n";
 		} while (mauSo == 0);
@@ -73,6 +76,14 @@ struct PhanSo
 		else
 			cout << tuSo << "/" << mauSo;
 	}
+
+	PhanSo congPS(const PhanSo p1, const PhanSo p2)
+	{
+		this->tuSo = p1.tuSo * p2.mauSo + p2.tuSo * p1.mauSo;
+		this->mauSo = p1.mauSo * p2.mauSo;
+		this->toiGian();
+		return *this;
+	}
 };
 
 struct MaTranPS
@@ -83,8 +94,13 @@ struct MaTranPS
 	void nhapMT()
 	{
 		int r, c;
-		cout << "Nhap so dong va so cot: ";
-		cin >> r >> c;
+		do
+		{
+			cout << "Nhap so dong va so cot: ";
+			cin >> r >> c;
+			if (r < 0 || c < 0)
+				cout << "Nhap khong hop le, nhap lai!\n";
+		} while (r < 0 || c < 0);
 		row = r;
 		col = c;
 
@@ -133,13 +149,15 @@ int soSanh(const PhanSo p1, const PhanSo p2)
 	return -1;
 }
 
-double tongMaTran(const MaTranPS mt)
+PhanSo tongMT(const MaTranPS mt)
 {
-	double sum = 0;
+	PhanSo sum;
+	sum.tuSo = 0;
+	sum.mauSo = 1;
 	for (int i = 0; i < mt.row; i++)
 	{
 		for (int j = 0; j < mt.col; j++)
-			sum += (double)mt.arr[i][j].tuSo / mt.arr[i][j].mauSo;
+			sum.congPS(sum, mt.arr[i][j]);
 	}
 	return sum;
 }
@@ -188,7 +206,10 @@ int main()
 	MaTranPS mtPS;
 	mtPS.nhapMT();
 	mtPS.inMT();
-	cout << "\nTong cac phan tu trong ma tran: " << tongMaTran(mtPS) << "\n";
+	PhanSo tong = tongMT(mtPS);
+	cout << "\nTong phan so trong ma tran: ";
+	tong.inPS();
+	cout << "\n";
 
 	PhanSo psLonNhat = timPSLonNhat(mtPS);
 	cout << "Phan so lon nhat trong mang: ";
