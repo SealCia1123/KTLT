@@ -9,6 +9,7 @@ class Matrix
   private:
 	int row, col;
 	int **mt;
+	bool valid = 1;
 
   public:
 	int getRow()
@@ -21,6 +22,11 @@ class Matrix
 		return this->row;
 	}
 
+	bool getValid()
+	{
+		return this->valid;
+	}
+
 	void setRow(int row)
 	{
 		this->row = row;
@@ -29,6 +35,11 @@ class Matrix
 	void setCol(int col)
 	{
 		this->col = col;
+	}
+
+	void setValid(bool valid)
+	{
+		this->valid = valid;
 	}
 
 	void initMatrix()
@@ -65,55 +76,51 @@ class Matrix
 		delete[] this->mt;
 	}
 
-	Matrix mulMatrix(const Matrix mt2)
+	Matrix mulMatrix(const Matrix mt1, const Matrix mt2)
 	{
-		// a[n][m] x b[p][q] = c[n][q]
-		Matrix mulMT;
-		if (this->col != mt2.row)
+		// a[n][m] x b[q][p] = c[n][p]
+		if (mt1.col != mt2.row)
 		{
-			mulMT.row = -1;
-			mulMT.col = -1;
-			return mulMT;
+			this->valid = 0;
+			return *this;
 		}
-		mulMT.row = this->row;
-		mulMT.col = mt2.col;
-		mulMT.mt = new int *[mulMT.row];
-		for (int i = 0; i < mulMT.row; i++)
-			mulMT.mt[i] = new int[mulMT.col];
+		this->row = mt1.row;
+		this->col = mt2.col;
+		this->mt = new int *[this->row];
+		for (int i = 0; i < this->row; i++)
+			this->mt[i] = new int[this->col];
 
-		for (int i = 0; i < mulMT.row; i++)
+		for (int i = 0; i < this->row; i++)
 		{
-			for (int j = 0; j < mulMT.col; j++)
+			for (int j = 0; j < this->col; j++)
 			{
-				for (int k = 0; k < this->col; k++)
-					mulMT.mt[i][j] += this->mt[i][k] + mt2.mt[k][j];
+				for (int k = 0; k < mt1.col; k++)
+					this->mt[i][j] += mt1.mt[i][k] * mt2.mt[k][j];
 			}
 		}
-		return mulMT;
+		return *this;
 	}
 
-	Matrix sumMatrix(const Matrix mt2)
+	Matrix sumMatrix(const Matrix mt1, const Matrix mt2)
 	{
 		// a[n][m] + b[n][m] =  c[n][m]
-		Matrix sumMT;
-		if (this->row != mt2.row || this->col != mt2.col)
+		if (mt1.row != mt2.row || mt1.col != mt2.col)
 		{
-			sumMT.row = -1;
-			sumMT.col = -1;
-			return sumMT;
+			this->valid = 0;
+			return *this;
 		}
-		sumMT.row = this->row;
-		sumMT.col = this->col;
-		sumMT.mt = new int *[sumMT.row];
-		for (int i = 0; i < sumMT.row; i++)
-			sumMT.mt[i] = new int[sumMT.col];
+		this->row = mt1.row;
+		this->col = mt1.col;
+		this->mt = new int *[this->row];
+		for (int i = 0; i < this->row; i++)
+			this->mt[i] = new int[this->col];
 
-		for (int i = 0; i < sumMT.row; i++)
+		for (int i = 0; i < this->row; i++)
 		{
-			for (int j = 0; j < sumMT.col; j++)
-				sumMT.mt[i][j] = this->mt[i][j] + mt2.mt[i][j];
+			for (int j = 0; j < this->col; j++)
+				this->mt[i][j] = mt1.mt[i][j] + mt2.mt[i][j];
 		}
-		return sumMT;
+		return *this;
 	}
 };
 
@@ -128,8 +135,9 @@ int main()
 	cout << "Matrix 2:\n";
 	mt2.print();
 
-	mulMT = mt1.mulMatrix(mt2);
-	if (mulMT.getRow() == -1 || mulMT.getCol() == -1)
+	mulMT = mulMT.mulMatrix(mt1, mt2);
+
+	if (!mulMT.getValid())
 		cout << "Can't multiply two matrix with different size!\n";
 	else
 	{
@@ -138,9 +146,9 @@ int main()
 		mulMT.freeMt();
 	}
 
-	sumMT = mt1.sumMatrix(mt2);
-	if (sumMT.getRow() == -1 || sumMT.getCol() == -1)
-		cout << "Can't multiply two matrix with different size!\n";
+	sumMT = sumMT.sumMatrix(mt1, mt2);
+	if (!sumMT.getValid())
+		cout << "Can't sum two matrix with different size!\n";
 	else
 	{
 		cout << "Sum matrix:\n";

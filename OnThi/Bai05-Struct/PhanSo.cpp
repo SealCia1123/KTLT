@@ -146,6 +146,25 @@ double tongMaTran(const MaTranPS mt)
 	return sum;
 }
 
+PhanSo timPSLonNhat(const MaTranPS mt)
+{
+	PhanSo p;
+	p.tuSo = mt.arr[0][0].tuSo;
+	p.mauSo = mt.arr[0][0].mauSo;
+	for (int i = 0; i < mt.row; i++)
+	{
+		for (int j = 0; j < mt.col; j++)
+		{
+			if ((double)mt.arr[i][j].tuSo / mt.arr[i][j].mauSo < (double)p.tuSo / p.mauSo)
+			{
+				p.tuSo = mt.arr[i][j].tuSo;
+				p.mauSo = mt.arr[i][j].mauSo;
+			}
+		}
+	}
+	return p;
+}
+
 int main()
 {
 	MaTranPS p;
@@ -153,6 +172,11 @@ int main()
 	p.inMT();
 	double t = tongMaTran(p);
 	cout << "Tong cac phan tu trong ma tran: " << fixed << setprecision(2) << t << "\n";
+
+	PhanSo psLonNhat = timPSLonNhat(p);
+	cout << "Phan so lon nhat trong mang: ";
+	psLonNhat.inPS();
+	cout << "\n";
 
 	p.freeMT();
 	return 0;
