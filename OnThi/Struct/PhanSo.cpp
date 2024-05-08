@@ -11,7 +11,6 @@ e) Tim va in ra phan so lon nhat tren tung dong
 */
 #include <iostream>
 #include <stdlib.h>
-#include <string.h>
 using namespace std;
 
 int UCLN(int a, int b)
