@@ -29,11 +29,6 @@ struct PhanSo
 
 	void dinhDang()
 	{
-		if (tuSo == mauSo)
-		{
-			tuSo = 1;
-			mauSo = 1;
-		}
 		if (mauSo < 0)
 		{
 			tuSo *= -1;
@@ -67,7 +62,6 @@ struct PhanSo
 
 	void inPS()
 	{
-		toiGian();
 		dinhDang();
 		if (mauSo == 1)
 			cout << tuSo;
@@ -118,7 +112,6 @@ struct MaTranPS
 
 	void inMT()
 	{
-		cout << "Ma tran:\n";
 		for (int i = 0; i < row; i++)
 		{
 			for (int j = 0; j < col; j++)
@@ -127,6 +120,16 @@ struct MaTranPS
 				cout << "\t";
 			}
 			cout << "\n";
+		}
+	}
+
+	void toiGianMT()
+	{
+		cout << "Ma tran:\n";
+		for (int i = 0; i < row; i++)
+		{
+			for (int j = 0; j < col; j++)
+				arr[i][j].toiGian();
 		}
 	}
 
@@ -205,7 +208,13 @@ int main()
 {
 	MaTranPS mtPS;
 	mtPS.nhapMT();
+	cout << "=====Ma tran goc=====\n";
 	mtPS.inMT();
+	cout << "=====Ma tran da toi gian=====\n";
+	MaTranPS mtToiGian = mtPS;
+	mtToiGian.toiGianMT();
+	mtToiGian.inMT();
+
 	PhanSo tong = tongMT(mtPS);
 	cout << "\nTong phan so trong ma tran: ";
 	tong.inPS();
