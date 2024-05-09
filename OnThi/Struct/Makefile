@@ -8,5 +8,8 @@ MT: MaTran.cpp
 PS: PhanSo.cpp
 	g++ PhanSo.cpp $(CXXFLAGS) -o .output/PhanSo; .output/PhanSo
 
+Circle: Circle.cpp
+	g++ Circle.cpp $(CXXFLAGS) -o .output/Circle; .output/Circle
+
 clean:
 	rm .output/*
