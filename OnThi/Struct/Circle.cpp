@@ -4,27 +4,29 @@
 /* Nhập danh sách đường tròn, sắp xếp kết quả giảm dần theo diện tích, mỗi kết quả xuất ra gồm (toạ độ tâm, bán
 kính, diện tích).
 */
+#include <cmath>
 #include <cstring>
+#include <iomanip>
 #include <iostream>
 #include <string>
 using namespace std;
 
 struct Point
 {
-	int x, y;
+	double x, y;
 
 	void inputPoint()
 	{
-		int x, y;
+		double x, y;
 		cout << "Nhap vao hoanh do va tung do: ";
 		cin >> x >> y;
 		this->x = x;
 		this->y = y;
 	}
 
-	string printPoint()
+	void printPoint()
 	{
-		return "( " + to_string(this->x) + ", " + to_string(this->y) + " )";
+		cout << "( " << this->x << ", " << this->y << " )";
 	}
 };
 
@@ -32,12 +34,44 @@ struct Circle
 {
 	Point centerPoint;
 	double radius;
+
+	void inputCircle()
+	{
+		cout << "Nhap vao tam duong tron\n";
+		centerPoint.inputPoint();
+		do
+		{
+			cout << "Nhap vao ban kinh: ";
+			cin >> radius;
+			if (radius <= 0)
+				cout << "Nhap lai ban kinh!\n";
+		} while (radius <= 0);
+	}
+
+	void printCircle()
+	{
+		cout << "Tam: ";
+		this->centerPoint.printPoint();
+		cout << ", ban kinh: " << this->radius;
+	}
 };
+
+double distancePoints(const Point p1, const Point p2)
+{
+	double result = sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
+	return result;
+}
+
+bool pointInsideCircle(const Point p, const Circle c)
+{
+	double distance = distancePoints(p, c.centerPoint);
+	return (distance < c.radius) ? true : false;
+}
 
 int main()
 {
-	Point p1;
-	p1.inputPoint();
-	cout << p1.printPoint() << endl;
+	Circle c;
+	c.inputCircle();
+	c.printCircle();
 	return 0;
 }
