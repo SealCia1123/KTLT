@@ -1,14 +1,3 @@
-/*
-
-De bai:
-Cho ma tran voi moi phan tu la mot phan so
-a) Nhap va xuat ma tran voi dang tu/mau
-b) Toi gian phan so
-c) Tinh tong cac phan tu cua ma tran
-d) Tim phan so lon nhat cua ma tran
-e) Tim va in ra phan so lon nhat tren tung dong
-
-*/
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
@@ -203,6 +192,23 @@ PhanSo *lonNhatTungDong(const MaTranPS mt)
 	return p;
 }
 
+PhanSo *lonNhatTungCot(const MaTranPS mt)
+{
+	int index = 0;
+	PhanSo *p = new PhanSo[mt.col];
+	for (int j = 0; j < mt.col; j++)
+	{
+		PhanSo temp = mt.arr[0][j];
+		for (int i = 0; i < mt.row; i++)
+		{
+			if (soSanh(temp, mt.arr[i][j]) == -1)
+				temp = mt.arr[i][j];
+		}
+		p[index++] = temp;
+	}
+	return p;
+}
+
 int main()
 {
 	MaTranPS mtPS;
@@ -233,7 +239,17 @@ int main()
 		cout << "\n";
 	}
 
+	PhanSo *lonNhatCot = lonNhatTungCot(mtPS);
+	cout << "\nCac phan so lon nhat trong tung cot:\n";
+	for (int i = 0; i < mtPS.col; i++)
+	{
+		cout << "Cot " << i + 1 << ": ";
+		lonNhatCot[i].inPS();
+		cout << "\n";
+	}
+
 	delete[] dayPSLonNhat;
+	delete[] lonNhatCot;
 	mtPS.freeMT();
 	return 0;
 }

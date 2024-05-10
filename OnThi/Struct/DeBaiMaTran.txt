@@ -1,0 +1,5 @@
+Tạo ra 1 struct Ma Trận có chức năng:
+- Cho người dùng nhập số dòng, cột -> Khởi tạo ma trận với giá trị ngẫu nhiên (1-99)
+- In ra ma trận
+- Cộng 2 ma trận
+- Nhân 2 ma trận
