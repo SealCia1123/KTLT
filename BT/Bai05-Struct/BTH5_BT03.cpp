@@ -9,20 +9,6 @@ struct NhanVien
 	int namVaoLam, namSinh;
 };
 
-void input(NhanVien &nv);
-
-void printNV(const NhanVien nv);
-
-int calYears(const int currentYear, const int countYear);
-
-int main()
-{
-	NhanVien nv1;
-	input(nv1);
-	printNV(nv1);
-	return 0;
-}
-
 void input(NhanVien &nv)
 {
 	cout << "Nhap ho ten: ";
@@ -35,8 +21,14 @@ void input(NhanVien &nv)
 	cin >> nv.namVaoLam;
 }
 
+int calYears(const int currentYear, const int countYear)
+{
+	return currentYear - countYear;
+}
+
 void printNV(const NhanVien nv)
 {
+	cout << "=====Thong tin nhan vien=====\n";
 	time_t t = time(nullptr);
 	tm *const currentYear = localtime(&t);
 	cout << "Ho ten: " << nv.hoTen << endl;
@@ -47,7 +39,10 @@ void printNV(const NhanVien nv)
 	cout << "Tham nien: " << calYears(1900 + currentYear->tm_year, nv.namVaoLam) << endl;
 }
 
-int calYears(const int currentYear, const int countYear)
+int main()
 {
-	return currentYear - countYear;
+	NhanVien nv1;
+	input(nv1);
+	printNV(nv1);
+	return 0;
 }
