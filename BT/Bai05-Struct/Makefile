@@ -11,6 +11,8 @@ CXXFLAGS = -Wall --std=c++23
 
 4: BTH5_BT04.cpp
 	g++ $(CXXFLAGS) BTH5_BT04.cpp -o .output/BT04; .output/BT04
+v2: BTH5_BT04_v2.cpp
+	g++ $(CXXFLAGS) BTH5_BT04_v2.cpp -o .output/BT04_v2; .output/BT04_v2
 
 5: BTH5_BT05.cpp
 	g++ $(CXXFLAGS) BTH5_BT05.cpp -o .output/BT05; .output/BT05
