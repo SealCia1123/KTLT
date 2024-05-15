@@ -73,7 +73,6 @@ int main()
 				cout << "So luong sinh vien vuot qua kich thuoc toi da\n";
 			else
 				dsSinhVien[size++].nhapSV();
-			/* getInfo(dsSinhVien[size++]); */
 			break;
 		}
 

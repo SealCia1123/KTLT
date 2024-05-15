@@ -24,12 +24,12 @@ int main()
 	int index = 0, isContinue;
 	do
 	{
-		cout << "====================Nhap vao thong tin sach====================\n";
+		cout << "=====Nhap vao thong tin sach=====\n";
 		getInfo(listBooks[index++]);
 		cout << "Tiep tuc nhap sach (1/0): ";
 		cin >> isContinue;
 		if (!isContinue)
-			cout << "====================Ket thuc nhap sach====================\n";
+			cout << "=====Ket thuc nhap sach=====\n";
 		cin.ignore();
 	} while (isContinue);
 	cout << "Nhap ten tac gia can tim: ";
@@ -45,7 +45,12 @@ void getInfo(Sach &sach)
 	cout << "Nhap ten tac gia: ";
 	cin.getline(sach.tenTacGia, 20);
 	cout << "Nhap ngay thang nam xuat ban: ";
-	cin >> sach.ngayXuatBan.ngay >> sach.ngayXuatBan.thang >> sach.ngayXuatBan.nam;
+	cin >> sach.ngayXuatBan.ngay;
+	cin.ignore();
+	cin >> sach.ngayXuatBan.thang;
+	cin.ignore();
+	cin >> sach.ngayXuatBan.nam;
+	cin.ignore();
 }
 
 void printInfo(const Sach *sach, int size, char *name)
