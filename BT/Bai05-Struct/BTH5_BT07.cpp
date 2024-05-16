@@ -1,5 +1,4 @@
 #include <cstring>
-#include <iomanip>
 #include <iostream>
 #include <string>
 #define MAX_PRODUCTS 30
@@ -75,7 +74,6 @@ struct DsSanPham
 	void freeMem()
 	{
 		delete[] this->sp;
-		this->sp = NULL;
 	}
 
 	void print()
@@ -91,7 +89,7 @@ struct DsSanPham
 			cout << "San pham thu " << i + 1 << "\n";
 			cout << "Ma san pham: " << sp[i].maSP << endl;
 			cout << "Ten san pham: " << sp[i].tenSP << endl;
-			cout << "Don gia: " << fixed << setprecision(0) << sp[i].donGia << endl;
+			cout << "Don gia: " << sp[i].donGia << endl;
 			cout << "So luong ton kho: " << sp[i].slTonKho << endl;
 			cout << "=========================================\n";
 		}
@@ -107,7 +105,7 @@ struct DsSanPham
 			sp[i - 1].slTonKho = sp[i].slTonKho;
 		}
 		--currentSize;
-		cout << "Xoa san pham thanh cong\n";
+		cout << "XOA THANH CONG!\n";
 	}
 
 	void sortProducts()
@@ -120,7 +118,7 @@ struct DsSanPham
 					swapProducts(sp[j], sp[j + 1]);
 			}
 		}
-		cout << "Sap xep thanh cong\n";
+		cout << "SAP XEP THANH CONG!\n";
 	}
 };
 

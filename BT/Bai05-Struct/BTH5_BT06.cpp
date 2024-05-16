@@ -1,5 +1,4 @@
 #include <cstring>
-#include <iomanip>
 #include <iostream>
 #include <string>
 #define MAX_PRODUCTS 30
@@ -33,11 +32,11 @@ int main()
 	while (true)
 	{
 		system("clear");
-		cout << "1. Nhap thong tin san pham\n";
-		cout << "2. Xuat thong tin san pham\n";
-		cout << "3. Sua thong tin san pham\n";
-		cout << "4. Xoa thong tin san pham\n";
-		cout << "5. Sap xep lai san pham theo so luong ton kho\n";
+		cout << "1. Nhap san pham\n";
+		cout << "2. Xuat danh sach san pham\n";
+		cout << "3. Sua san pham\n";
+		cout << "4. Xoa san pham\n";
+		cout << "5. Sap xep san pham theo so luong ton kho\n";
 		cout << "0. Thoat chuong trinh\n";
 		cout << "Nhap lua chon: ";
 		cin >> choice;
@@ -55,14 +54,14 @@ int main()
 
 		case 2:
 		{
-			cout << "====Thong tin san pham====\n";
+			cout << "THONG TIN SAN PHAM\n";
 			print(listProducts, currentSize);
 			break;
 		}
 
 		case 3:
 		{
-			cout << "====Chinh sua thong tin san pham====\n";
+			cout << "CHINH SUA SAN PHAM\n";
 			if (currentSize == 0)
 			{
 				cout << "Danh sach san pham hien dang trong\n";
@@ -83,7 +82,7 @@ int main()
 
 		case 4:
 		{
-			cout << "====Xoa san pham====\n";
+			cout << "XOA SAN PHAM\n";
 			if (currentSize == 0)
 			{
 				cout << "Danh sach san pham hien dang trong\n";
@@ -94,25 +93,23 @@ int main()
 			{
 				cout << "Nhap so thu tu san pham can xoa: ";
 				cin >> deleteIndex;
+				cin.ignore();
 				if (deleteIndex < 0 || deleteIndex > currentSize)
 					cout << "Nhap lai so thu tu cua san pham\n";
 			} while (deleteIndex < 0 || deleteIndex > currentSize);
 			deleteProduct(listProducts, --deleteIndex, currentSize);
-			print(listProducts, currentSize);
 			break;
 		}
 
 		case 5:
 		{
-			cout << "Sap xep thu tu san pham theo so luong ton kho\n";
+			cout << "SAP XEP THEO SO LUONG TON KHO\n";
 			sortProducts(listProducts, currentSize);
-			print(listProducts, currentSize);
 			break;
 		}
 		case 0:
 		{
 			delete[] listProducts;
-			listProducts = NULL;
 			cout << "Ket thuc chuong trinh\n";
 			return 0;
 		}
@@ -124,7 +121,6 @@ int main()
 		if (!isContinue)
 		{
 			delete[] listProducts;
-			listProducts = NULL;
 			cout << "Ket thuc chuong trinh\n";
 			return 0;
 		}
@@ -133,7 +129,7 @@ int main()
 
 void input(SanPham &sp)
 {
-	cout << "====Nhap thong tin san pham====\n";
+	cout << "Nhap thong tin san pham\n";
 	cout << "Nhap vao ma san pham: ";
 	cin.getline(sp.maSP, 10);
 	cout << "Nhap vao ten san pham: ";
@@ -152,44 +148,62 @@ void print(const SanPham *sp, int size)
 		cout << "Danh sach san pham hien dang trong\n";
 		return;
 	}
+	cout << "=========================================\n";
 	for (int i = 0; i < size; i++)
 	{
-		cout << "===San pham thu " << i + 1 << "===\n";
+		cout << "San pham thu " << i + 1 << "\n";
 		cout << "Ma san pham: " << sp[i].maSP << endl;
 		cout << "Ten san pham: " << sp[i].tenSP << endl;
-		cout << "Don gia: " << fixed << setprecision(0) << sp[i].donGia << endl;
+		cout << "Don gia: " << sp[i].donGia << endl;
 		cout << "So luong ton kho: " << sp[i].slTonKho << endl;
+		cout << "=========================================\n";
 	}
-	cout << "=========================================\n";
 }
 
 void modify(SanPham &sp)
 {
-	cout << "Nhap vao ma san pham: ";
-	cin.getline(sp.maSP, 10);
-	cout << "Nhap vao ten san pham: ";
-	getline(cin, sp.tenSP);
-	cout << "Nhap don gia: ";
-	cin >> sp.donGia;
-	cout << "Nhap so luong ton kho: ";
-	cin >> sp.slTonKho;
+	int choice;
+	cout << "1. Sua ma san pham\n";
+	cout << "2. Sua ten san pham\n";
+	cout << "3. Sua don gia\n";
+	cout << "4. Sua so luong ton kho\n";
+	cout << "Nhap lua chon: ";
+	cin >> choice;
 	cin.ignore();
+	switch (choice)
+	{
+	case 1:
+		cout << "Nhap ma san pham moi: ";
+		cin.getline(sp.maSP, 10);
+		break;
+	case 2:
+		cout << "Nhap ten san pham moi: ";
+		getline(cin, sp.tenSP);
+		break;
+	case 3:
+		cout << "Nhap don gia moi: ";
+		cin >> sp.donGia;
+		break;
+	case 4:
+		cout << "Nhap so luong ton kho moi: ";
+		cin >> sp.slTonKho;
+		break;
+	default:
+		cout << "Lua chon khong hop le\n";
+	}
 }
 
 void deleteProduct(SanPham *sp, int index, int &size)
 {
-	if (index < size - 1)
+	for (int i = index + 1; i < size; i++)
 	{
-		for (int i = index + 1; i < size; i++)
-		{
-			strcpy(sp[i - 1].maSP, sp[i].maSP);
-			sp[i - 1].tenSP = sp[i].tenSP;
-			sp[i - 1].donGia = sp[i].donGia;
-			sp[i - 1].slTonKho = sp[i].slTonKho;
-		}
+		strcpy(sp[i - 1].maSP, sp[i].maSP);
+		sp[i - 1].tenSP = sp[i].tenSP;
+		sp[i - 1].donGia = sp[i].donGia;
+		sp[i - 1].slTonKho = sp[i].slTonKho;
 	}
 	--size;
-	cout << "=========Xoa san pham thanh cong=========\n";
+	cout << "XOA SAN PHAM THANH CONG!\n";
 }
 
 void mySwap(SanPham &a, SanPham &b)
@@ -207,10 +221,6 @@ void sortProducts(SanPham *sp, int currentSize)
 		{
 			if (sp[j].slTonKho > sp[j + 1].slTonKho)
 				mySwap(sp[j], sp[j + 1]);
-			// mySwap(sp[j].maSP, sp[j + 1].maSP);
-			// mySwap(sp[j].tenSP, sp[j + 1].tenSP);
-			// mySwap(sp[j].donGia, sp[j + 1].donGia);
-			// mySwap(sp[j].slTonKho, sp[j + 1].slTonKho);
 		}
 	}
 }
