@@ -70,7 +70,7 @@ int main()
 			int modifiedIndex = 0;
 			do
 			{
-				cout << "Nhap so thu tu san pham can chinh sua: ";
+				cout << "Nhap ma san pham can chinh sua: ";
 				cin >> modifiedIndex;
 				cin.ignore();
 				if (modifiedIndex < 0 || modifiedIndex > currentSize)

@@ -9,22 +9,29 @@ struct SinhVien
 	double diemToan, diemVan, diemNN, diemTB;
 };
 
-void getInfo(SinhVien &sv);
+void input(SinhVien &sv);
+
+void inputListStudents(SinhVien *ds, int index, int size);
 
 void printInfo(const SinhVien sv);
 
+void printListSV(const SinhVien *ds, int size);
+
 void ranking(const SinhVien sv);
+
+void searching(const SinhVien *ds, int size, string maSV);
 
 int main()
 {
 	SinhVien listStudent[45];
-	int choice, currentStudentSize = 0;
+	int choice, currentSize = 0;
 	while (true)
 	{
 		system("clear");
-		cout << "====================Menu====================\n";
+		cout << "==================== Menu ====================\n";
 		cout << "1. Nhap thong tin sinh vien\n";
-		cout << "2. In thong tin sinh vien\n";
+		cout << "2. In thong tin danh sach sinh vien\n";
+		cout << "3. In thong tin sinh vien can tim\n";
 		cout << "0. Thoat chuong trinh\n";
 		cout << "Nhap vao lua chon: ";
 		cin >> choice;
@@ -33,29 +40,39 @@ int main()
 		{
 		case 1:
 		{
-			cout << "=================NHAP THONG TIN=================\n";
-			if (currentStudentSize >= 45)
-				cout << "So luong sinh vien vuot qua kich thuoc toi da\n";
-			else
-				getInfo(listStudent[currentStudentSize++]);
+			int temp;
+			cout << "NHAP THONG TIN\n";
+			do
+			{
+				cout << "Nhap so luong sinh vien can nhap: ";
+				cin >> temp;
+				cin.ignore();
+				if (temp < 0 || temp + currentSize > 45)
+					cout << "Vui long nhap lai\n";
+			} while (temp < 0 || temp + currentSize > 45);
+			inputListStudents(listStudent, currentSize, currentSize + temp);
+			currentSize += temp;
 			break;
 		}
 		case 2:
 		{
-			if (currentStudentSize == 0)
+			if (currentSize == 0)
+				cout << "Danh sach sinh vien hien dang trong\n";
+			else
+				printListSV(listStudent, currentSize);
+			break;
+		}
+		case 3:
+		{
+			if (currentSize == 0)
 				cout << "Danh sach sinh vien hien dang trong\n";
 			else
 			{
-				int index;
-				do
-				{
-					cout << "Nhap vao so thu tu sinh vien can tim: ";
-					cin >> index;
-					if ((index < 1 || index > 45) || (index > currentStudentSize))
-						cout << "Vui long nhap lai so thu tu\n";
-				} while ((index < 1 || index > 45) || (index > currentStudentSize));
-				cout << "=================THONG TIN SINH VIEN=================\n";
-				printInfo(listStudent[--index]);
+				string maSV;
+				cout << "Nhap ma sinh vien can tim: ";
+				getline(cin, maSV);
+				cout << "THONG TIN SINH VIEN\n";
+				searching(listStudent, currentSize, maSV);
 			}
 			break;
 		}
@@ -78,7 +95,7 @@ int main()
 	}
 }
 
-void getInfo(SinhVien &sv)
+void input(SinhVien &sv)
 {
 	cout << "Nhap MSSV: ";
 	getline(cin, sv.MSSV);
@@ -94,7 +111,17 @@ void getInfo(SinhVien &sv)
 	cin >> sv.diemVan;
 	cout << "Nhap diem ngoai ngu: ";
 	cin >> sv.diemNN;
+	cin.ignore();
 	sv.diemTB = ((sv.diemToan + sv.diemVan) * 2 + sv.diemNN) / 5;
+}
+
+void inputListStudents(SinhVien *ds, int index, int size)
+{
+	for (int i = index; i < size; i++)
+	{
+		cout << "==== NHAP SINH VIEN THU " << i + 1 << " ====\n";
+		input(ds[i]);
+	}
 }
 
 void printInfo(const SinhVien sv)
@@ -118,4 +145,26 @@ void ranking(const SinhVien sv)
 		cout << "Xep loai: Trung binh\n";
 	else
 		cout << "Xep loai: Duoi trung binh\n";
+}
+
+void printListSV(const SinhVien *ds, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		cout << "==== SINH VIEN THU " << i + 1 << " ====\n";
+		printInfo(ds[i]);
+	}
+}
+
+void searching(const SinhVien *ds, int size, string maSV)
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (ds[i].MSSV == maSV)
+		{
+			printInfo(ds[i]);
+			return;
+		}
+	}
+	cout << "Khong tim thay sinh vien\n";
 }

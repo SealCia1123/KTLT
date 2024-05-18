@@ -24,13 +24,13 @@ int main()
 	int index = 0, isContinue;
 	do
 	{
-		cout << "=====Nhap vao thong tin sach=====\n";
+		cout << "NHAP THONG TIN SACH\n";
 		getInfo(listBooks[index++]);
 		cout << "Tiep tuc nhap sach (1/0): ";
 		cin >> isContinue;
-		if (!isContinue)
-			cout << "=====Ket thuc nhap sach=====\n";
 		cin.ignore();
+		if (!isContinue)
+			cout << "KET THUC NHAP SACH\n";
 	} while (isContinue);
 	cout << "Nhap ten tac gia can tim: ";
 	cin.getline(author, 20);
