@@ -2,11 +2,12 @@
 #include <iostream>
 #include <string>
 #define MAX_PRODUCTS 30
+#define MAX_CHAR_SIZE 11
 using namespace std;
 
 struct SanPham
 {
-	char maSP[10];
+	char maSP[MAX_CHAR_SIZE];
 	string tenSP;
 	double donGia;
 	int slTonKho;
@@ -18,9 +19,9 @@ void inputProducts(SanPham *dsSanPham, int index, int size);
 
 void print(const SanPham *sp, int size);
 
-void modify(SanPham &sp);
+void modify(SanPham *dsSP, int size, char *maSPCanTim);
 
-void deleteProduct(SanPham *sp, int index, int &size);
+void deleteProduct(SanPham *dsSP, int &size, char *maSPCanXoa);
 
 void mySwap(SanPham &a, SanPham &b);
 
@@ -76,16 +77,10 @@ int main()
 				cout << "Danh sach san pham hien dang trong\n";
 				break;
 			}
-			int modifiedIndex = 0;
-			do
-			{
-				cout << "Nhap ma san pham can chinh sua: ";
-				cin >> modifiedIndex;
-				cin.ignore();
-				if (modifiedIndex < 0 || modifiedIndex > currentSize)
-					cout << "Nhap lai so thu tu cua san pham\n";
-			} while (modifiedIndex < 0 || modifiedIndex > currentSize);
-			modify(listProducts[--modifiedIndex]);
+			char maSPCanTim[MAX_CHAR_SIZE];
+			cout << "Nhap vao ma san pham can tim: ";
+			cin.getline(maSPCanTim, MAX_CHAR_SIZE);
+			modify(listProducts, currentSize, maSPCanTim);
 			break;
 		}
 
@@ -97,16 +92,10 @@ int main()
 				cout << "Danh sach san pham hien dang trong\n";
 				break;
 			}
-			int deleteIndex = 0;
-			do
-			{
-				cout << "Nhap so thu tu san pham can xoa: ";
-				cin >> deleteIndex;
-				cin.ignore();
-				if (deleteIndex < 0 || deleteIndex > currentSize)
-					cout << "Nhap lai so thu tu cua san pham\n";
-			} while (deleteIndex < 0 || deleteIndex > currentSize);
-			deleteProduct(listProducts, --deleteIndex, currentSize);
+			char maSPCanXoa[MAX_CHAR_SIZE];
+			cout << "Nhap vao ma san pham can xoa: ";
+			cin.getline(maSPCanXoa, MAX_CHAR_SIZE);
+			deleteProduct(listProducts, currentSize, maSPCanXoa);
 			break;
 		}
 
@@ -139,7 +128,7 @@ int main()
 void input(SanPham &sp)
 {
 	cout << "Nhap vao ma san pham: ";
-	cin.getline(sp.maSP, 10);
+	cin.getline(sp.maSP, MAX_CHAR_SIZE);
 	cout << "Nhap vao ten san pham: ";
 	getline(cin, sp.tenSP);
 	cout << "Nhap don gia: ";
@@ -177,45 +166,61 @@ void print(const SanPham *sp, int size)
 	}
 }
 
-void modify(SanPham &sp)
+void modify(SanPham *dsSP, int size, char *maSPCanTim)
 {
-	int choice;
-	cout << "1. Sua ten san pham\n";
-	cout << "2. Sua don gia\n";
-	cout << "3. Sua so luong ton kho\n";
-	cout << "Nhap lua chon: ";
-	cin >> choice;
-	cin.ignore();
-	switch (choice)
+	for (int i = 0; i < size; i++)
 	{
-	case 1:
-		cout << "Nhap ten san pham moi: ";
-		getline(cin, sp.tenSP);
-		break;
-	case 2:
-		cout << "Nhap don gia moi: ";
-		cin >> sp.donGia;
-		break;
-	case 3:
-		cout << "Nhap so luong ton kho moi: ";
-		cin >> sp.slTonKho;
-		break;
-	default:
-		cout << "Lua chon khong hop le\n";
+		if (strcmp(dsSP[i].maSP, maSPCanTim) == 0)
+		{
+			cout << "1. Sua ten san pham\n";
+			cout << "2. Sua don gia\n";
+			cout << "3. Sua so luong ton kho\n";
+			cout << "Nhap lua chon: ";
+			int choice;
+			cin >> choice;
+			cin.ignore();
+			switch (choice)
+			{
+			case 1:
+				cout << "Nhap ten san pham: ";
+				getline(cin, dsSP[i].tenSP);
+				break;
+			case 2:
+				cout << "Nhap don gia: ";
+				cin >> dsSP[i].donGia;
+				break;
+			case 3:
+				cout << "Nhap so luong ton kho: ";
+				cin >> dsSP[i].slTonKho;
+				break;
+			default:
+				cout << "Lua chon khong hop le!\n";
+			}
+			return;
+		}
 	}
+	cout << "KHONG TIM THAY!\n";
 }
 
-void deleteProduct(SanPham *sp, int index, int &size)
+void deleteProduct(SanPham *dsSP, int &size, char *maSPCanXoa)
 {
-	for (int i = index + 1; i < size; i++)
+	for (int i = 0; i < size; i++)
 	{
-		strcpy(sp[i - 1].maSP, sp[i].maSP);
-		sp[i - 1].tenSP = sp[i].tenSP;
-		sp[i - 1].donGia = sp[i].donGia;
-		sp[i - 1].slTonKho = sp[i].slTonKho;
+		if (strcmp(dsSP[i].maSP, maSPCanXoa) == 0)
+		{
+			for (int j = i + 1; j < size; j++)
+			{
+				strcpy(dsSP[j - 1].maSP, dsSP[j].maSP);
+				dsSP[j - 1].tenSP = dsSP[j].tenSP;
+				dsSP[j - 1].donGia = dsSP[j].donGia;
+				dsSP[j - 1].slTonKho = dsSP[j].slTonKho;
+			}
+			cout << "XOA SAN PHAM THANH CONG!\n";
+			--size;
+			return;
+		}
 	}
-	--size;
-	cout << "XOA SAN PHAM THANH CONG!\n";
+	cout << "KHONG TIM THAY!\n";
 }
 
 void mySwap(SanPham &a, SanPham &b)
