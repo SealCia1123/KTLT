@@ -14,6 +14,8 @@ struct SanPham
 
 void input(SanPham &sp);
 
+void inputProducts(SanPham *dsSanPham, int index, int size);
+
 void print(const SanPham *sp, int size);
 
 void modify(SanPham &sp);
@@ -45,10 +47,17 @@ int main()
 		{
 		case 1:
 		{
-			if (currentSize > MAX_PRODUCTS)
-				cout << "So luong san pham vuot qua muc toi da\n";
-			else
-				input(listProducts[currentSize++]);
+			int temp;
+			do
+			{
+				cout << "Nhap so luong san pham can them: ";
+				cin >> temp;
+				cin.ignore();
+				if (temp < 0 || temp + currentSize > MAX_PRODUCTS)
+					cout << "So luong nhap khong hop le, nhap lai\n";
+			} while (temp < 0 || temp + currentSize > MAX_PRODUCTS);
+			inputProducts(listProducts, currentSize, currentSize + temp);
+			currentSize += temp;
 			break;
 		}
 
@@ -129,7 +138,6 @@ int main()
 
 void input(SanPham &sp)
 {
-	cout << "Nhap thong tin san pham\n";
 	cout << "Nhap vao ma san pham: ";
 	cin.getline(sp.maSP, 10);
 	cout << "Nhap vao ten san pham: ";
@@ -139,6 +147,15 @@ void input(SanPham &sp)
 	cout << "Nhap so luong ton kho: ";
 	cin >> sp.slTonKho;
 	cin.ignore();
+}
+
+void inputProducts(SanPham *dsSanPham, int index, int size)
+{
+	for (int i = index; i < size; i++)
+	{
+		cout << "==== NHAP SAN PHAM THU " << i + 1 << " ====\n";
+		input(dsSanPham[i]);
+	}
 }
 
 void print(const SanPham *sp, int size)
@@ -163,28 +180,23 @@ void print(const SanPham *sp, int size)
 void modify(SanPham &sp)
 {
 	int choice;
-	cout << "1. Sua ma san pham\n";
-	cout << "2. Sua ten san pham\n";
-	cout << "3. Sua don gia\n";
-	cout << "4. Sua so luong ton kho\n";
+	cout << "1. Sua ten san pham\n";
+	cout << "2. Sua don gia\n";
+	cout << "3. Sua so luong ton kho\n";
 	cout << "Nhap lua chon: ";
 	cin >> choice;
 	cin.ignore();
 	switch (choice)
 	{
 	case 1:
-		cout << "Nhap ma san pham moi: ";
-		cin.getline(sp.maSP, 10);
-		break;
-	case 2:
 		cout << "Nhap ten san pham moi: ";
 		getline(cin, sp.tenSP);
 		break;
-	case 3:
+	case 2:
 		cout << "Nhap don gia moi: ";
 		cin >> sp.donGia;
 		break;
-	case 4:
+	case 3:
 		cout << "Nhap so luong ton kho moi: ";
 		cin >> sp.slTonKho;
 		break;

@@ -13,7 +13,6 @@ struct SanPham
 
 	void input()
 	{
-		cout << "NHAP SAN PHAM:\n";
 		cout << "Nhap ma san pham: ";
 		cin.getline(maSP, 10);
 		cout << "Nhap ten san pham: ";
@@ -28,28 +27,23 @@ struct SanPham
 	void modify()
 	{
 		int choice;
-		cout << "1. Sua ma san pham\n";
-		cout << "2. Sua ten san pham\n";
-		cout << "3. Sua don gia\n";
-		cout << "4. Sua so luong ton kho\n";
+		cout << "1. Sua ten san pham\n";
+		cout << "2. Sua don gia\n";
+		cout << "3. Sua so luong ton kho\n";
 		cout << "Nhap lua chon: ";
 		cin >> choice;
 		cin.ignore();
 		switch (choice)
 		{
 		case 1:
-			cout << "Nhap ma san pham moi: ";
-			cin.getline(maSP, 10);
-			break;
-		case 2:
 			cout << "Nhap ten san pham moi: ";
 			getline(cin, tenSP);
 			break;
-		case 3:
+		case 2:
 			cout << "Nhap don gia moi: ";
 			cin >> donGia;
 			break;
-		case 4:
+		case 3:
 			cout << "Nhap so luong ton kho moi: ";
 			cin >> slTonKho;
 			break;
@@ -74,6 +68,15 @@ struct DsSanPham
 	void freeMem()
 	{
 		delete[] this->sp;
+	}
+
+	void inputProducts(int index)
+	{
+		for (int i = index; i < currentSize + index; i++)
+		{
+			cout << "==== NHAP SAN PHAM THU " << i + 1 << " ====\n";
+			sp[i].input();
+		}
 	}
 
 	void print()
@@ -142,10 +145,18 @@ int main()
 		{
 		case 1:
 		{
-			if (ds.currentSize > MAX_PRODUCTS)
-				cout << "So luong san pham vuot qua muc toi da\n";
-			else
-				ds.sp[ds.currentSize++].input();
+			int temp;
+			do
+			{
+				cout << "Nhap so luong san pham can them: ";
+				cin >> temp;
+				if (temp < 0 || temp + ds.currentSize > 45)
+					cout << "So luong khong hop le, nhap lai\n";
+			} while (temp < 0 || temp + ds.currentSize > 45);
+			/* if (ds.currentSize > MAX_PRODUCTS) */
+			/* 	cout << "So luong san pham vuot qua muc toi da\n"; */
+			/* else */
+			/* 	ds.sp[ds.currentSize++].input(); */
 			break;
 		}
 

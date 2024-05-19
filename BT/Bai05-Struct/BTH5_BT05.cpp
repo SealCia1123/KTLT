@@ -13,32 +13,34 @@ struct Sach
 	NTN ngayXuatBan;
 };
 
-void getInfo(Sach &sach);
+void input(Sach &sach);
 
-void printInfo(const Sach *sach, int size, char *name);
+void inputBooks(Sach *dsSach, int size);
+
+void searching(const Sach *sach, int size, char *name);
 
 int main()
 {
 	Sach listBooks[50];
-	char author[20];
-	int index = 0, isContinue;
+	char author[21];
+	int size;
 	do
 	{
-		cout << "NHAP THONG TIN SACH\n";
-		getInfo(listBooks[index++]);
-		cout << "Tiep tuc nhap sach (1/0): ";
-		cin >> isContinue;
+		cout << "Nhap vao so luong sach can nhap: ";
+		cin >> size;
 		cin.ignore();
-		if (!isContinue)
-			cout << "KET THUC NHAP SACH\n";
-	} while (isContinue);
+		if (size < 0 || size > 50)
+			cout << "So luong nhap khong hop le, nhap lai\n";
+	} while (size < 0 || size > 50);
+
+	inputBooks(listBooks, size);
 	cout << "Nhap ten tac gia can tim: ";
-	cin.getline(author, 20);
-	printInfo(listBooks, ++index, author);
+	cin.getline(author, 21);
+	searching(listBooks, size, author);
 	return 0;
 }
 
-void getInfo(Sach &sach)
+void input(Sach &sach)
 {
 	cout << "Nhap ten sach: ";
 	cin.getline(sach.tenSach, 20);
@@ -53,13 +55,13 @@ void getInfo(Sach &sach)
 	cin.ignore();
 }
 
-void printInfo(const Sach *sach, int size, char *name)
+void searching(const Sach *sach, int size, char *name)
 {
 	for (int i = 0; i < size; i++)
 	{
 		if (strcmp(sach[i].tenTacGia, name) == 0)
 		{
-			cout << "Sach cua tac gia " << sach[i].tenTacGia << "\n";
+			cout << "==== Sach cua tac gia " << sach[i].tenTacGia << " ====\n";
 			cout << "Ten: " << sach[i].tenSach << endl;
 			cout << "Ten tac gia: " << sach[i].tenTacGia << endl;
 			cout << "Ngay thang nam xuat ban: " << sach[i].ngayXuatBan.ngay << "/" << sach[i].ngayXuatBan.thang << "/" << sach[i].ngayXuatBan.nam << endl;
@@ -67,4 +69,13 @@ void printInfo(const Sach *sach, int size, char *name)
 		}
 	}
 	cout << "Khong tim thay sach cua tac gia " << name << endl;
+}
+
+void inputBooks(Sach *dsSach, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		cout << "==== NHAP SACH THU " << i + 1 << " ====\n";
+		input(dsSach[i]);
+	}
 }
