@@ -18,6 +18,7 @@ int main()
 				break;
 			outData << temp << " ";
 		}
+		cout << "Ghi he so luong thanh cong!\n";
 		outData.close();
 	}
 	return 0;

@@ -12,6 +12,7 @@ void readData()
 	{
 		// a b c
 		int i = 1;
+		cout << "Noi dung cua file: ";
 		while (i <= 5)
 		{
 			if (i % 2 == 1)
@@ -24,6 +25,7 @@ void readData()
 				inData.ignore();
 			i++;
 		}
+		inData.close();
 	}
 }
 
@@ -36,6 +38,7 @@ void writeData()
 	else
 	{
 		int i = 1;
+		cout << "Nhap vao 3 so: ";
 		while (i <= 3)
 		{
 			int num;
@@ -43,6 +46,7 @@ void writeData()
 			outData << num << " ";
 			i++;
 		}
+		outData.close();
 	}
 }
 
