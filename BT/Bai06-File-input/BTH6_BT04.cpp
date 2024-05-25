@@ -3,18 +3,16 @@
 #include <iostream>
 using namespace std;
 
-void capitalizeStr(char *c)
+void capitalizeStr(char &c)
 {
-	for (int i = 0; i < strlen(c); i++)
-	{
-		if (c[i] >= 'a' && c[i] <= 'z')
-			c[i] -= 32;
-	}
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
 }
 
 int main()
 {
 	char str[20];
+	char *c = str;
 	ofstream outStr;
 	cout << "Nhap vao chuoi ky tu: ";
 	cin.getline(str, 20);
@@ -23,9 +21,10 @@ int main()
 		cout << "Mo file khong thanh cong\n";
 	else
 	{
-		capitalizeStr(str);
+		for (int i = 0; i < strlen(str); i++)
+			capitalizeStr(*(c + i));
 		outStr << str << endl;
+		outStr.close();
 	}
-	outStr.close();
 	return 0;
 }
